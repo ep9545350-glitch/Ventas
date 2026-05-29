@@ -60,6 +60,8 @@ export class Productos {
 
       this.editandoId = null;
 
+      this.cerrarModal();
+
       Swal.fire({
         icon: 'success',
         title: 'Producto actualizado',
@@ -78,6 +80,7 @@ export class Productos {
       };
 
       this.productos.push(nuevoProducto);
+      this.cerrarModal();
 
       Swal.fire({
         icon: 'success',
@@ -142,6 +145,19 @@ export class Productos {
 
 
   }
+
+  cerrarModal(){
+
+  const modal = document.getElementById('productoModal');
+
+  if(modal){
+
+    modal.classList.remove('show');
+    modal.setAttribute('style', 'display:none');
+
+  }
+
+}
   get productosFiltrados() {
 
     return this.productos.filter(producto =>
