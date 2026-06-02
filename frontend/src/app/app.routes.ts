@@ -1,7 +1,6 @@
 import { Dashboard } from './pages/dashboard/dashboard';
 import { Component } from '@angular/core';
 import { Routes } from '@angular/router';
-import path from 'path';
 import { Productos } from './pages/productos/productos';
 import { Ventas } from './pages/ventas/ventas';
 import { Usuarios } from './pages/usuarios/usuarios';

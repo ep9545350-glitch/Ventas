@@ -4,9 +4,10 @@ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-productos',
+  standalone: true,
   imports: [FormsModule],
   templateUrl: './productos.html',
-  styleUrl: './productos.css',
+  styleUrls: ['./productos.css'],
 })
 export class Productos {
 
