@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdimnLayout } from './admin-layout';
+import { Adminlayout } from './admin-layout';
 
-describe('AdimnLayout', () => {
-  let component: AdimnLayout;
-  let fixture: ComponentFixture<AdimnLayout>;
+describe('Adminlayout', () => {
+  let component: Adminlayout;
+  let fixture: ComponentFixture<Adminlayout>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AdimnLayout],
+      imports: [Adminlayout],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AdimnLayout);
+    fixture = TestBed.createComponent(Adminlayout);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
@@ -20,3 +20,4 @@ describe('AdimnLayout', () => {
     expect(component).toBeTruthy();
   });
 });
+

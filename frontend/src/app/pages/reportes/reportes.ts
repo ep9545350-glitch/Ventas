@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-reportes',
+  standalone: true,
   imports: [],
   templateUrl: './reportes.html',
-  styleUrl: './reportes.css',
+  styleUrls: ['./reportes.css'],
 })
 export class Reportes {}

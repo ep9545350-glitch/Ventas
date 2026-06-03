@@ -1,195 +1,209 @@
-<div class="container-fluid p-4">
+<div class="dash-content">
 
-  <h2 class="mb-4">
-    Dashboard
-  </h2>
-
-  <div class="row g-4">
-
-    <div class="col-md-3">
-
-      <div class="card shadow border-0">
-
-        <div class="card-body">
-
-          <h5 class="text-muted">
-            Ventas Hoy
-          </h5>
-
-          <h2>
-            S/ 3,500
-          </h2>
-
-        </div>
-
-      </div>
-
+  <!-- Cabecera -->
+  <div class="page-head">
+    <div>
+      <div class="page-title">Dashboard</div>
+      <div class="page-sub">Resumen general del sistema de ventas</div>
     </div>
-
-    <div class="col-md-3">
-
-      <div class="card shadow border-0">
-
-        <div class="card-body">
-
-          <h5 class="text-muted">
-            Productos
-          </h5>
-
-          <h2>
-            125
-          </h2>
-
-        </div>
-
-      </div>
-
+    <div class="date-chip">
+      <i class="ti ti-calendar" style="font-size:13px;vertical-align:-2px;"></i>
+      Junio 2025
     </div>
-
-    <div class="col-md-3">
-
-      <div class="card shadow border-0">
-
-        <div class="card-body">
-
-          <h5 class="text-muted">
-            Usuarios
-          </h5>
-
-          <h2>
-            8
-          </h2>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <div class="col-md-3">
-
-      <div class="card shadow border-0">
-
-        <div class="card-body">
-
-          <h5 class="text-muted">
-            Ventas Mes
-          </h5>
-
-          <h2>
-            S/ 18,900
-          </h2>
-
-        </div>
-
-      </div>
-
-    </div>
-
   </div>
 
-  <div class="row mt-5">
-
-    <div class="col-md-8">
-
-      <div class="card shadow border-0">
-
-        <div class="card-body">
-
-          <h5 class="mb-4">
-            Últimas ventas
-          </h5>
-
-          <table class="table table-hover">
-
-            <thead class="table-dark">
-
-              <tr>
-                <th>Cliente</th>
-                <th>Producto</th>
-                <th>Total</th>
-              </tr>
-
-            </thead>
-
-            <tbody>
-
-              <tr>
-                <td>Juan Pérez</td>
-                <td>Laptop</td>
-                <td>S/ 2500</td>
-              </tr>
-
-              <tr>
-                <td>Ana Torres</td>
-                <td>Mouse</td>
-                <td>S/ 80</td>
-              </tr>
-
-              <tr>
-                <td>Carlos Ruiz</td>
-                <td>Monitor</td>
-                <td>S/ 900</td>
-              </tr>
-
-            </tbody>
-
-          </table>
-
+  <!-- Métricas -->
+  <div class="metrics">
+    <div class="mc">
+      <div class="mc-accent" style="background:#5b4cf5;"></div>
+      <div class="mc-top">
+        <div>
+          <div class="mc-label">Ventas hoy</div>
+          <div class="mc-value">S/ 3,500</div>
+          <div class="mc-change up">
+            <i class="ti ti-trending-up" style="font-size:13px;"></i> +12% vs ayer
+          </div>
         </div>
-
+        <div class="mc-icon" style="background:#f0eeff;color:#5b4cf5;">
+          <i class="ti ti-cash"></i>
+        </div>
       </div>
-
     </div>
 
-    <div class="col-md-4">
-
-      <div class="card shadow border-0">
-
-        <div class="card-body">
-
-          <h5 class="mb-4">
-            Productos más vendidos
-          </h5>
-
-          <ul class="list-group">
-
-            <li class="list-group-item">
-              Laptop
-            </li>
-
-            <li class="list-group-item">
-              Mouse
-            </li>
-
-            <li class="list-group-item">
-              Teclado
-            </li>
-
-            <li class="list-group-item">
-              Monitor
-            </li>
-
-          </ul>
-
+    <div class="mc">
+      <div class="mc-accent" style="background:#06b6d4;"></div>
+      <div class="mc-top">
+        <div>
+          <div class="mc-label">Productos</div>
+          <div class="mc-value">125</div>
+          <div class="mc-change up">
+            <i class="ti ti-plus" style="font-size:13px;"></i> 3 nuevos
+          </div>
         </div>
-
+        <div class="mc-icon" style="background:#ecfeff;color:#06b6d4;">
+          <i class="ti ti-box"></i>
+        </div>
       </div>
-
     </div>
 
+    <div class="mc">
+      <div class="mc-accent" style="background:#f59e0b;"></div>
+      <div class="mc-top">
+        <div>
+          <div class="mc-label">Usuarios</div>
+          <div class="mc-value">8</div>
+          <div class="mc-change neutral">Sin cambios</div>
+        </div>
+        <div class="mc-icon" style="background:#fffbeb;color:#f59e0b;">
+          <i class="ti ti-users"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-accent" style="background:#22c55e;"></div>
+      <div class="mc-top">
+        <div>
+          <div class="mc-label">Ventas del mes</div>
+          <div class="mc-value">S/ 18,900</div>
+          <div class="mc-change up">
+            <i class="ti ti-trending-up" style="font-size:13px;"></i> +8% vs anterior
+          </div>
+        </div>
+        <div class="mc-icon" style="background:#f0fdf4;color:#22c55e;">
+          <i class="ti ti-trending-up"></i>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="card shadow border-0 mt-4">
-
-    <div class="card-body">
-
-      <h5>Ventas de la semana</h5>
-
-      <canvas id="ventasChart"></canvas>
-
+  <!-- Tabla + Top vendidos -->
+  <div class="grid2">
+    <div class="dash-card c1">
+      <div class="card-hd">
+        <div class="card-title">
+          <i class="ti ti-list" style="font-size:16px;color:#5b4cf5;"></i>
+          Últimas ventas
+        </div>
+        <span class="badge">3 recientes</span>
+      </div>
+      <table class="ventas-table">
+        <thead>
+          <tr>
+            <th>Cliente</th>
+            <th>Producto</th>
+            <th>Total</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="client-row">
+                <div class="av av-p">JP</div> Juan Pérez
+              </div>
+            </td>
+            <td>Laptop</td>
+            <td class="amt">S/ 2,500</td>
+            <td><span class="s-ok">Pagado</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="client-row">
+                <div class="av av-t">AT</div> Ana Torres
+              </div>
+            </td>
+            <td>Mouse</td>
+            <td class="amt">S/ 80</td>
+            <td><span class="s-ok">Pagado</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="client-row">
+                <div class="av av-a">CR</div> Carlos Ruiz
+              </div>
+            </td>
+            <td>Monitor</td>
+            <td class="amt">S/ 900</td>
+            <td><span class="s-ok">Pagado</span></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
+    <div class="dash-card c2">
+      <div class="card-hd">
+        <div class="card-title">
+          <i class="ti ti-trophy" style="font-size:16px;color:#f59e0b;"></i>
+          Más vendidos
+        </div>
+      </div>
+      <ul class="top-list">
+        <li class="top-item">
+          <span class="rank">#1</span>
+          <span class="item-name">Laptop</span>
+          <div class="bar-wrap">
+            <div class="bar-fill bf1"></div>
+          </div>
+        </li>
+        <li class="top-item">
+          <span class="rank">#2</span>
+          <span class="item-name">Monitor</span>
+          <div class="bar-wrap">
+            <div class="bar-fill bf2"></div>
+          </div>
+        </li>
+        <li class="top-item">
+          <span class="rank">#3</span>
+          <span class="item-name">Teclado</span>
+          <div class="bar-wrap">
+            <div class="bar-fill bf3"></div>
+          </div>
+        </li>
+        <li class="top-item">
+          <span class="rank">#4</span>
+          <span class="item-name">Mouse</span>
+          <div class="bar-wrap">
+            <div class="bar-fill bf4"></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Gráfico semanal -->
+  <div class="dash-card c3">
+    <div class="card-hd">
+      <div class="card-title">
+        <i class="ti ti-chart-bar" style="font-size:16px;color:#5b4cf5;"></i>
+        Ventas de la semana
+      </div>
+      <span class="badge-green">S/ 18,900 total</span>
+    </div>
+    <div class="chart-wrap">
+      <div class="bc">
+        <div class="bv" style="--h:42%;height:var(--h);"></div><span class="bl">Lun</span>
+      </div>
+      <div class="bc">
+        <div class="bv" style="--h:63%;height:var(--h);"></div><span class="bl">Mar</span>
+      </div>
+      <div class="bc">
+        <div class="bv" style="--h:51%;height:var(--h);"></div><span class="bl">Mié</span>
+      </div>
+      <div class="bc">
+        <div class="bv" style="--h:78%;height:var(--h);"></div><span class="bl">Jue</span>
+      </div>
+      <div class="bc">
+        <div class="bv" style="--h:95%;height:var(--h);"></div><span class="bl">Vie</span>
+      </div>
+      <div class="bc">
+        <div class="bv" style="--h:58%;height:var(--h);"></div><span class="bl">Sáb</span>
+      </div>
+      <div class="bc">
+        <div class="bv" style="--h:34%;height:var(--h);"></div><span class="bl">Dom</span>
+      </div>
+    </div>
+    <canvas #ventasChart></canvas>
   </div>
 
 </div>
