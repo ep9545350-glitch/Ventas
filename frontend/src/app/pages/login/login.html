@@ -1,0 +1,78 @@
+<div class="login-page">
+  <div class="login-shell" [class.side-hover]="sideHovered" [class.card-hover]="cardHovered">
+    <aside class="login-side" (mouseenter)="onSideEnter()" (mouseleave)="onSideLeave()">
+      <div class="brand-chip">VentasPro</div>
+      <div class="hero-copy">
+        <span class="hero-label">Bienvenido a tu panel</span>
+        <h1>Inicia sesión y domina tus ventas</h1>
+        <p>Accede rápido a inventario, clientes, transacciones y reportes con un solo click.</p>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-card blue">
+          <span>342</span>
+          <p>Transacciones</p>
+        </div>
+        <div class="stat-card green">
+          <span>18,900</span>
+          <p>Ventas</p>
+        </div>
+        <div class="stat-card yellow">
+          <span>98%</span>
+          <p>Satisfacción</p>
+        </div>
+      </div>
+
+      <div class="hero-image">
+        <div class="chart-panel">
+          <div class="chart-title">Tendencia semanal</div>
+          <div class="chart-bars">
+            <div class="bar bar-1"></div>
+            <div class="bar bar-2"></div>
+            <div class="bar bar-3"></div>
+            <div class="bar bar-4"></div>
+            <div class="bar bar-5"></div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="login-box" (mouseenter)="onCardEnter()" (mouseleave)="onCardLeave()">
+      <div class="login-card">
+        <div class="login-head">
+          <div>
+            <span class="login-chip">Acceso</span>
+            <h2>Iniciar sesión</h2>
+          </div>
+          <p>Introduce tus credenciales para abrir el sistema de ventas.</p>
+        </div>
+
+        <form class="login-form" (submit)="onSubmit($event)">
+          <label>
+            Correo electrónico
+            <input type="email" placeholder="correo@empresa.com" />
+          </label>
+          <label>
+            Contraseña
+            <input type="password" placeholder="********" />
+          </label>
+
+          <div class="login-meta">
+            <label class="checkbox">
+              <input type="checkbox" />
+              <span>Recordarme</span>
+            </label>
+            <a href="#" (click)="$event.preventDefault()">¿Olvidaste tu contraseña?</a>
+          </div>
+
+          <button type="submit" class="btn-pri">Entrar</button>
+        </form>
+
+        <div class="login-footer">
+          <span>¿No tienes cuenta?</span>
+          <a href="#" (click)="$event.preventDefault()">Solicita acceso</a>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>

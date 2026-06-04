@@ -1,1 +1,376 @@
-<p>reportes works!</p>
+<div class="reportes-page">
+
+    <!-- Cabecera -->
+    <div class="pg-head">
+        <div>
+      <div class="pg-title">Reportes</div>
+      <div class="pg-sub">Análisis de ventas · Dashboard</div>
+    </div>
+    </div>
+
+    <!-- Barra de filtros de período -->
+    <div class="rep-filter-bar">
+        <span class="rfb-label">Período</span>
+        <div class="rep-period-btns">
+            <div class="rpb">Hoy</div>
+            <div class="rpb">Semana</div>
+            <div class="rpb on">Mes</div>
+            <div class="rpb">Trimestre</div>
+            <div class="rpb">Año</div>
+        </div>
+        <div class="rfb-sep"></div>
+        <div class="rfb-date">
+            <input type="date" value="2025-06-01">
+            <span style="font-size:12px;color:#94a3b8;">hasta</span>
+            <input type="date" value="2025-06-30">
+        </div>
+        <button class="rfb-btn-export">
+            <i class="ti ti-download" style="font-size:13px;"></i> Exportar PDF
+        </button>
+    </div>
+
+    <!-- Métricas del período -->
+    <div class="rep-mets">
+        <div class="rmet" style="--rmet-color:#4f46e5;">
+            <div class="rmet-stripe" style="background:#4f46e5;"></div>
+            <div class="rmet-icon" style="background:#eef2ff; color:#4f46e5;">
+                <i class="ti ti-chart-line"></i>
+            </div>
+            <div class="rmet-lbl">Total Ventas</div>
+            <div class="rmet-val">S/ 18,900</div>
+            <div class="rmet-sub up">↑ +8% vs mes anterior</div>
+        </div>
+        <div class="rmet" style="--rmet-color:#10b981;">
+            <div class="rmet-stripe" style="background:#10b981;"></div>
+            <div class="rmet-icon" style="background:#d1fae5; color:#10b981;">
+                <i class="ti ti-receipt"></i>
+            </div>
+            <div class="rmet-lbl">Transacciones</div>
+            <div class="rmet-val">342</div>
+            <div class="rmet-sub up">↑ +15 vs mes anterior</div>
+        </div>
+        <div class="rmet" style="--rmet-color:#f59e0b;">
+            <div class="rmet-stripe" style="background:#f59e0b;"></div>
+            <div class="rmet-icon" style="background:#fef3c7; color:#f59e0b;">
+                <i class="ti ti-star"></i>
+            </div>
+            <div class="rmet-lbl">Mejor Día</div>
+            <div class="rmet-val">Viernes</div>
+            <div class="rmet-sub warn">S/ 3,200 promedio</div>
+        </div>
+        <div class="rmet" style="--rmet-color:#06b6d4;">
+            <div class="rmet-stripe" style="background:#06b6d4;"></div>
+            <div class="rmet-icon" style="background:#cffafe; color:#06b6d4;">
+                <i class="ti ti-user-check"></i>
+            </div>
+            <div class="rmet-lbl">Mejor Cajero</div>
+            <div class="rmet-val">Ana T.</div>
+            <div class="rmet-sub" style="color:#06b6d4;">S/ 9,440 en ventas</div>
+        </div>
+    </div>
+
+    <!-- Grid 2 columnas -->
+    <div class="rep-grid">
+
+        <!-- Ventas por mes (barras horizontales) -->
+        <div class="rep-card delay1">
+            <div class="rep-card-head">
+                <div class="rep-card-title">
+                    <i class="ti ti-chart-bar" style="font-size:15px; color:#4f46e5;"></i>
+                    Ventas por Mes
+                </div>
+                <span class="rep-badge blue">2025</span>
+            </div>
+            <div class="hbar-list">
+                <div class="hbar-item">
+                    <span class="hbar-label">Ene</span>
+                    <div class="hbar-track">
+                        <div class="hbar-fill" style="width:55%;"></div>
+                    </div>
+                    <span class="hbar-val">S/ 14,200</span>
+                </div>
+                <div class="hbar-item">
+                    <span class="hbar-label">Feb</span>
+                    <div class="hbar-track">
+                        <div class="hbar-fill" style="width:48%;"></div>
+                    </div>
+                    <span class="hbar-val">S/ 12,400</span>
+                </div>
+                <div class="hbar-item">
+                    <span class="hbar-label">Mar</span>
+                    <div class="hbar-track">
+                        <div class="hbar-fill" style="width:72%;"></div>
+                    </div>
+                    <span class="hbar-val">S/ 18,600</span>
+                </div>
+                <div class="hbar-item">
+                    <span class="hbar-label">Abr</span>
+                    <div class="hbar-track">
+                        <div class="hbar-fill" style="width:61%;"></div>
+                    </div>
+                    <span class="hbar-val">S/ 15,800</span>
+                </div>
+                <div class="hbar-item">
+                    <span class="hbar-label">May</span>
+                    <div class="hbar-track">
+                        <div class="hbar-fill" style="width:68%;"></div>
+                    </div>
+                    <span class="hbar-val">S/ 17,500</span>
+                </div>
+                <div class="hbar-item">
+                    <span class="hbar-label">Jun</span>
+                    <div class="hbar-track">
+                        <div class="hbar-fill" style="width:73%; background:linear-gradient(90deg,#10b981,#34d399);">
+                        </div>
+                    </div>
+                    <span class="hbar-val" style="color:#10b981;">S/ 18,900</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top 5 productos -->
+        <div class="rep-card delay2">
+            <div class="rep-card-head">
+                <div class="rep-card-title">
+                    <i class="ti ti-trophy" style="font-size:15px; color:#f59e0b;"></i>
+                    Top Productos
+                </div>
+                <span class="rep-badge">Este mes</span>
+            </div>
+            <div class="top-prod-list">
+                <div class="top-prod-item">
+                    <span class="tpi-rank gold">#1</span>
+                    <div class="tpi-icon" style="background:#fef3c7; color:#d97706;">🌾</div>
+                    <div class="tpi-info">
+                        <div class="tpi-name">Arroz Extra Superior</div>
+                        <div class="tpi-cat">Alimentos · 1kg</div>
+                    </div>
+                    <span class="tpi-qty">x248</span>
+                    <span class="tpi-amount">S/ 868</span>
+                </div>
+                <div class="top-prod-item">
+                    <span class="tpi-rank silver">#2</span>
+                    <div class="tpi-icon" style="background:#dbeafe; color:#1d4ed8;">🥤</div>
+                    <div class="tpi-info">
+                        <div class="tpi-name">Inca Kola 1.5L</div>
+                        <div class="tpi-cat">Bebidas</div>
+                    </div>
+                    <span class="tpi-qty">x195</span>
+                    <span class="tpi-amount">S/ 819</span>
+                </div>
+                <div class="top-prod-item">
+                    <span class="tpi-rank bronze">#3</span>
+                    <div class="tpi-icon" style="background:#dcfce7; color:#15803d;">🧹</div>
+                    <div class="tpi-info">
+                        <div class="tpi-name">Limpiador Pino</div>
+                        <div class="tpi-cat">Limpieza</div>
+                    </div>
+                    <span class="tpi-qty">x143</span>
+                    <span class="tpi-amount">S/ 572</span>
+                </div>
+                <div class="top-prod-item">
+                    <span class="tpi-rank">#4</span>
+                    <div class="tpi-icon" style="background:#fce7f3; color:#be185d;">🍫</div>
+                    <div class="tpi-info">
+                        <div class="tpi-name">Snack Mix</div>
+                        <div class="tpi-cat">Snacks</div>
+                    </div>
+                    <span class="tpi-qty">x118</span>
+                    <span class="tpi-amount">S/ 354</span>
+                </div>
+                <div class="top-prod-item">
+                    <span class="tpi-rank">#5</span>
+                    <div class="tpi-icon" style="background:#ede9fe; color:#7c3aed;">🧴</div>
+                    <div class="tpi-info">
+                        <div class="tpi-name">Jabón Líquido</div>
+                        <div class="tpi-cat">Higiene</div>
+                    </div>
+                    <span class="tpi-qty">x97</span>
+                    <span class="tpi-amount">S/ 291</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Rendimiento por cajero -->
+    <div class="rep-card delay3" style="margin-bottom:20px;">
+        <div class="rep-card-head">
+            <div class="rep-card-title">
+                <i class="ti ti-users" style="font-size:15px; color:#4f46e5;"></i>
+                Rendimiento por Cajero
+            </div>
+            <span class="rep-badge green">Mes actual</span>
+        </div>
+        <table class="cajeros-table">
+            <thead>
+                <tr>
+                    <th>Cajero</th>
+                    <th>Ventas</th>
+                    <th>Total S/</th>
+                    <th>Ticket prom.</th>
+                    <th>Participación</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="caj-cell">
+                            <div class="caj-avatar" style="background:#e0e7ff; color:#4f46e5;">AT</div>
+                            <div>
+                                <div class="caj-name">Ana Torres</div>
+                                <div class="caj-role">Cajero</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="font-size:13px; color:#64748b;">178</td>
+                    <td class="caj-total">S/ 9,440</td>
+                    <td style="font-size:13px; color:#64748b;">S/ 53.03</td>
+                    <td style="width:140px;">
+                        <div style="background:#f1f5f9; border-radius:99px; height:6px; overflow:hidden;">
+                            <div class="caj-mini-bar" style="width:100%;"></div>
+                        </div>
+                        <div style="font-size:11px; color:#4f46e5; margin-top:3px; font-weight:600;">50%</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="caj-cell">
+                            <div class="caj-avatar" style="background:#dcfce7; color:#15803d;">JP</div>
+                            <div>
+                                <div class="caj-name">Juan Pérez</div>
+                                <div class="caj-role">Administrador</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="font-size:13px; color:#64748b;">164</td>
+                    <td class="caj-total">S/ 9,460</td>
+                    <td style="font-size:13px; color:#64748b;">S/ 57.68</td>
+                    <td style="width:140px;">
+                        <div style="background:#f1f5f9; border-radius:99px; height:6px; overflow:hidden;">
+                            <div class="caj-mini-bar"
+                                style="width:92%; background:linear-gradient(90deg,#10b981,#34d399);"></div>
+                        </div>
+                        <div style="font-size:11px; color:#10b981; margin-top:3px; font-weight:600;">50%</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Gráfico 30 días -->
+    <div class="rep-card full">
+        <div class="rep-card-head">
+            <div class="rep-card-title">
+                <i class="ti ti-calendar-stats" style="font-size:15px; color:#4f46e5;"></i>
+                Ventas Diarias — Junio 2025
+            </div>
+            <span class="rep-badge green">S/ 18,900 total</span>
+        </div>
+        <div class="vchart-wrap">
+            <div class="vc">
+                <div class="vv" style="height:38%;"></div><span class="vl">1</span>
+            </div>
+            <div class="vc">
+                <div class="vv" style="height:52%;"></div><span class="vl">2</span>
+            </div>
+            <div class="vc">
+                <div class="vv" style="height:44%;"></div><span class="vl">3</span>
+            </div>
+            <div class="vc">
+                <div class="vv" style="height:61%;"></div><span class="vl">4</span>
+            </div>
+            <div class="vc">
+                <div class="vv" style="height:55%;"></div><span class="vl">5</span>
+            </div>
+            <div class="vc">
+                <div class="vv" style="height:33%;"></div><span class="vl">6</span>
+            </div>
+            <div class="vc">
+                <div class="vv" style="height:29%;"></div><span class="vl">7</span>
+            </div>
+            <div class="vc">
+                <div class="vv" style="height:67%;"></div><span class="vl">8</span>
+            </div>
+            <div class="vc">
+                <div class="vv" style="height:71%;"></div><span class="vl">9</span>
+            </div>
+            <div class="vc">
+                <div class="vv" style="height:58%;"></div><span class="vl">10</span>
+            </div>
+            <div class="vc">
+                <div class="vv" style="height:64%;"></div><span class="vl">11</span>
+            </div>
+            <div class="vc">
+                <div class="vv" style="height:79%;"></div><span class="vl">12</span>
+            </div>
+            <div class="vc">
+                <div class="vv" style="height:42%;"></div><span class="vl">13</span>
+            </div>
+            <div class="vc">
+                <div class="vv" style="height:36%;"></div><span class="vl">14</span>
+            </div>
+            <div class="vc">
+                <div class="vv" style="height:83%;"></div><span class="vl">15</span>
+            </div>
+            <div class="vc">
+                <div class="vv" style="height:76%;"></div><span class="vl">16</span>
+            </div>
+            <div class="vc">
+                <div class="vv" style="height:68%;"></div><span class="vl">17</span>
+            </div>
+            <div class="vc">
+                <div class="vv" style="height:72%;"></div><span class="vl">18</span>
+            </div>
+            <div class="vc">
+                <div class="vv peak" style="height:100%;"></div><span class="vl">19</span>
+            </div>
+            <div class="vc">
+                <div class="vv" style="height:45%;"></div><span class="vl">20</span>
+            </div>
+            <div class="vc">
+                <div class="vv" style="height:39%;"></div><span class="vl">21</span>
+            </div>
+            <div class="vc">
+                <div class="vv" style="height:62%;"></div><span class="vl">22</span>
+            </div>
+            <div class="vc">
+                <div class="vv" style="height:57%;"></div><span class="vl">23</span>
+            </div>
+            <div class="vc">
+                <div class="vv" style="height:74%;"></div><span class="vl">24</span>
+            </div>
+            <div class="vc">
+                <div class="vv" style="height:88%;"></div><span class="vl">25</span>
+            </div>
+            <div class="vc">
+                <div class="vv" style="height:51%;"></div><span class="vl">26</span>
+            </div>
+            <div class="vc">
+                <div class="vv" style="height:43%;"></div><span class="vl">27</span>
+            </div>
+            <div class="vc">
+                <div class="vv" style="height:69%;"></div><span class="vl">28</span>
+            </div>
+            <div class="vc">
+                <div class="vv" style="height:77%;"></div><span class="vl">29</span>
+            </div>
+            <div class="vc">
+                <div class="vv" style="height:65%;"></div><span class="vl">30</span>
+            </div>
+        </div>
+        <div style="margin-top:10px; display:flex; gap:16px; justify-content:flex-end; font-size:11px; color:#94a3b8;">
+            <span style="display:flex;align-items:center;gap:5px;">
+                <span
+                    style="width:10px;height:10px;border-radius:2px;background:linear-gradient(135deg,#818cf8,#4f46e5);display:inline-block;"></span>
+                Ventas normales
+            </span>
+            <span style="display:flex;align-items:center;gap:5px;">
+                <span
+                    style="width:10px;height:10px;border-radius:2px;background:linear-gradient(135deg,#fbbf24,#f59e0b);display:inline-block;"></span>
+                Día pico
+            </span>
+        </div>
+    </div>
+
+</div>

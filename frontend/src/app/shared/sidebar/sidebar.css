@@ -1,3 +1,207 @@
-.sidebar{
-    width: 250px;
-}
+    @import url('https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@300;400;500&family=Syne:wght@700;800&display=swap');
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateX(-16px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .sidebar {
+        width: 215px;
+        height: 100vh;
+        background: #000000;
+        border-right: none;
+        display: flex;
+        flex-direction: column;
+        padding: 26px 0;
+        font-family: 'DM Sans', sans-serif;
+        animation: fadeIn 0.45s ease both;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 100
+    }
+
+    /*Logo*/
+    .sidebar-logo {
+        padding: 0 20px 22px;
+        border-bottom: 1px solid #262626;
+    }
+
+    .logo-row {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+    }
+
+    .logo-sq {
+        width: 30px;
+        height: 30px;
+        background: #262626;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logo-sq i {
+        font-size: 16px;
+        color: #fff;
+    }
+
+    .logo-txt {
+        font-family: 'Anton', sans-serif;
+        font-size: 1.1rem;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        line-height: 1;
+    }
+
+    .logo-txt span {
+        color: #a6a6a6;
+    }
+
+    /*Nav*/
+    .sidebar-nav {
+        padding: 16px 0;
+        flex: 1;
+    }
+
+    .nav-grp {
+        font-family: 'Anton', sans-serif;
+        font-size: 13px;
+        color: #817d7d;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 0 20px;
+        margin: 20px 0 8px;
+    }
+
+    .nav-item-custom {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 9px 20px;
+        font-size: 12.5px;
+        color: #a6a6a6;
+        font-weight: 400;
+        cursor: pointer;
+        transition: all 0.18s;
+        border-left: 2px solid transparent;
+        text-decoration: none;
+        opacity: 0;
+        animation: slideIn 0.35s ease forwards;
+    }
+
+    .nav-item-custom:nth-child(1) {
+        animation-delay: 0.10s;
+    }
+
+    .nav-item-custom:nth-child(2) {
+        animation-delay: 0.16s;
+    }
+
+    .nav-item-custom:nth-child(3) {
+        animation-delay: 0.22s;
+    }
+
+    .nav-item-custom:nth-child(4) {
+        animation-delay: 0.28s;
+    }
+
+    .nav-item-custom:nth-child(5) {
+        animation-delay: 0.34s;
+    }
+
+    .nav-item-custom:nth-child(6) {
+        animation-delay: 0.40s;
+    }
+
+    .nav-item-custom:hover {
+        color: #fff;
+        background: #1f1f1f;
+        /* Gris muy oscuro en hover */
+        border-left: 2px solid #595959;
+    }
+
+    .nav-item-custom.active {
+        color: #fff;
+        background: #262626;
+        border-left: 2px solid #fff;
+        font-weight: 500;
+    }
+
+    .nav-item-custom i {
+        font-size: 16px;
+    }
+
+    /*Footer*/
+    .sidebar-footer {
+        padding: 16px 20px;
+        border-top: 1px solid #262626;
+    }
+
+    .sf-user {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 8px;
+        border-radius: 9px;
+        transition: background 0.18s;
+        cursor: pointer;
+    }
+
+    .sf-user:hover {
+        background: #1f1f1f;
+    }
+
+    .sf-av {
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        background: #262626;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Syne', sans-serif;
+        font-size: 10px;
+        font-weight: 700;
+        color: #a6a6a6;
+        flex-shrink: 0;
+    }
+
+    .sf-name {
+        font-size: 12px;
+        color: #fff;
+        font-weight: 500;
+    }
+
+    .sf-role {
+        font-size: 10.5px;
+        color: #737373;
+    }
+
+    .sf-icon {
+        margin-left: auto;
+        color: #737373;
+        font-size: 14px;
+    }

@@ -1,61 +1,58 @@
-<div class="sidebar bg-dark text-white p-3 vh-100">
+<div class="sidebar">
 
-  <h3 class="text-center mb-4">
-    Ventas
-  </h3>
+  <!-- Logo -->
+  <div class="sidebar-logo">
+    <div class="logo-row">
+      <div class="logo-sq">
+        <i class="ti ti-bolt"></i>
+      </div>
+      <div class="logo-txt">Ventas<span>Pro</span></div>
+    </div>
+  </div>
 
-  <ul class="nav flex-column">
+  <!-- Navegación -->
+  <nav class="sidebar-nav">
 
-    <li class="nav-item mb-2">
-      <a routerLink="/" class="nav-link text-white">
+    <div class="nav-grp">Principal</div>
 
-        <i class="bi bi-speedometer2 me-2"></i>
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="nav-item-custom">
+      <i class="ti ti-layout-dashboard"></i> Dashboard
+    </a>
 
-        Dashboard
+    <a routerLink="/ventas" routerLinkActive="active" class="nav-item-custom">
+      <i class="ti ti-shopping-cart"></i> Ventas
+    </a>
 
-      </a>
-    </li>
+    <a routerLink="/productos" routerLinkActive="active" class="nav-item-custom">
+      <i class="ti ti-box"></i> Productos
+    </a>
 
-    <li class="nav-item mb-2">
-      <a routerLink="/productos" class="nav-link text-white">
+    <div class="nav-grp">Gestión</div>
 
-        <i class="bi bi-box-seam me-2"></i>
+    <a routerLink="/usuarios" routerLinkActive="active" class="nav-item-custom">
+      <i class="ti ti-users"></i> Usuarios
+    </a>
 
-        Productos
+    <a routerLink="/reportes" routerLinkActive="active" class="nav-item-custom">
+      <i class="ti ti-chart-bar"></i> Reportes
+    </a>
 
-      </a>
-    </li>
+    <a routerLink="/configuracion" routerLinkActive="active" class="nav-item-custom">
+      <i class="ti ti-settings"></i> Configuración
+    </a>
 
-    <li class="nav-item mb-2">
-      <a routerLink="/ventas" class="nav-link text-white">
+  </nav>
 
-        <i class="bi bi-cart-fill me-2"></i>
-
-        Ventas
-
-      </a>
-    </li>
-
-    <li class="nav-item mb-2">
-      <a routerLink="/usuarios" class="nav-link text-white">
-
-        <i class="bi bi-people-fill me-2"></i>
-
-        Usuarios
-
-      </a>
-    </li>
-
-    <li class="nav-item mb-2">
-      <a routerLink="/reportes" class="nav-link text-white">
-
-        <i class="bi bi-bar-chart-fill me-2"></i>
-
-        Reportes
-
-      </a>
-    </li>
-
-  </ul>
+  <!-- Footer usuario -->
+  <div class="sidebar-footer">
+    <div class="sf-user">
+      <div class="sf-av">DA</div>
+      <div>
+        <div class="sf-name">Daniel A.</div>
+        <div class="sf-role">Administrador</div>
+      </div>
+      <i class="ti ti-dots-vertical sf-icon"></i>
+    </div>
+  </div>
 
 </div>

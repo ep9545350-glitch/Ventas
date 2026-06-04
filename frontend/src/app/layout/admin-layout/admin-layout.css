@@ -1,0 +1,17 @@
+.main-content {
+    margin-left: 215px;
+    width: calc(100% - 215px);
+    min-height: 100vh;
+    background-color: #f8fafc;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar-custom {
+    width: 100%;
+}
+
+.page-container {
+    padding: 24px;
+    flex: 1;
+}

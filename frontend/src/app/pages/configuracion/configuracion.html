@@ -1,0 +1,164 @@
+<div class="configuracion-page">
+
+  <div class="pg-head">
+    <div>
+      <div class="pg-title">Configuración</div>
+      <div class="pg-sub">Personaliza tu sistema, controla permisos y define alertas.</div>
+    </div>
+  </div>
+
+  <div class="config-grid">
+    <div class="config-card delay1">
+      <div class="card-tag">Cuenta</div>
+      <div class="card-title">Perfil del negocio</div>
+      <div class="card-copy">Actualiza nombre, correo y datos principales de la empresa.</div>
+      <div class="card-footer">
+        <span>Última actualización</span>
+        <strong>Hoy</strong>
+      </div>
+    </div>
+
+    <div class="config-card delay2">
+      <div class="card-tag">Preferencias</div>
+      <div class="card-title">Tema y formato</div>
+      <div class="card-copy">Cambia idioma, estilo visual y formato de fecha.</div>
+      <div class="card-footer">
+        <span>Modo activo</span>
+        <strong>Claro</strong>
+      </div>
+    </div>
+
+    <div class="config-card delay3">
+      <div class="card-tag">Seguridad</div>
+      <div class="card-title">Acceso seguro</div>
+      <div class="card-copy">Configura contraseñas, límites de sesión y acceso multiusuario.</div>
+      <div class="card-footer">
+        <span>2FA</span>
+        <strong>Disponible</strong>
+      </div>
+    </div>
+
+    <div class="config-card delay4">
+      <div class="card-tag">Notificaciones</div>
+      <div class="card-title">Alertas activas</div>
+      <div class="card-copy">Recibe notificaciones en tiempo real de ventas y eventos clave.</div>
+      <div class="card-footer">
+        <span>Servicios</span>
+        <strong>Email + Push</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="config-main">
+    <section class="config-panel delay5">
+      <div class="config-panel-head">
+        <div>
+          <div class="panel-title">Ajustes generales</div>
+          <div class="panel-sub">Administra los valores principales de tu plataforma.</div>
+        </div>
+        <button class="btn-pri">Guardar cambios</button>
+      </div>
+
+      <div class="setting-grid">
+        <div class="setting-card pulse">
+          <div class="setting-top">
+            <span>Perfil</span>
+            <strong>Información básica</strong>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label>Nombre del negocio</label>
+              <input type="text" value="VentasPro" />
+            </div>
+            <div class="field">
+              <label>Zona horaria</label>
+              <select>
+                <option>GMT-5 Lima</option>
+                <option>GMT-3 Buenos Aires</option>
+                <option>GMT-6 Ciudad de México</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="setting-card glow">
+          <div class="setting-top">
+            <span>Visibilidad</span>
+            <strong>Preferencias UI</strong>
+          </div>
+          <div class="theme-list">
+            <button class="theme-pill active">Claro</button>
+            <button class="theme-pill">Oscuro</button>
+            <button class="theme-pill">Modern</button>
+          </div>
+        </div>
+
+        <div class="setting-card drift">
+          <div class="setting-top">
+            <span>Seguridad</span>
+            <strong>Protección de acceso</strong>
+          </div>
+          <div class="setting-item">
+            <div>
+              <h4>Login seguro</h4>
+              <p>Solicitar verificación adicional al iniciar sesión.</p>
+            </div>
+            <label class="switch">
+              <input type="checkbox" checked />
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="setting-item">
+            <div>
+              <h4>Alertas de sesión</h4>
+              <p>Envía avisos cuando alguien inicia sesión desde otro dispositivo.</p>
+            </div>
+            <label class="switch">
+              <input type="checkbox" />
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="config-aside delay6">
+      <div class="aside-card hover-card">
+        <div class="aside-title">Notificaciones</div>
+        <p>Activa o desactiva canales y elige qué alertas recibes en tiempo real.</p>
+        <div class="aside-list">
+          <div class="aside-row">
+            <span>Ventas diarias</span>
+            <label class="switch"><input type="checkbox" checked /><span class="slider"></span></label>
+          </div>
+          <div class="aside-row">
+            <span>Reportes semanales</span>
+            <label class="switch"><input type="checkbox" /><span class="slider"></span></label>
+          </div>
+          <div class="aside-row">
+            <span>Alertas de inventario</span>
+            <label class="switch"><input type="checkbox" checked /><span class="slider"></span></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="aside-card hover-card">
+        <div class="aside-title">Integraciones</div>
+        <div class="integration-list">
+          <div class="integration-item">
+            <span>Slack</span>
+            <strong>Conectado</strong>
+          </div>
+          <div class="integration-item">
+            <span>Correo</span>
+            <strong>Activo</strong>
+          </div>
+          <div class="integration-item">
+            <span>Zapier</span>
+            <strong>Deshabilitado</strong>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
