@@ -1,176 +1,130 @@
-import { Component } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import Swal from 'sweetalert2';
+
+
+interface Producto {
+  id: number;
+  nombre: string;
+  precio: number;
+  stock: number;
+}
 
 @Component({
   selector: 'app-productos',
   standalone: true,
-  imports: [FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './productos.html',
-  styleUrls: ['./productos.css'],
+  styleUrls: ['./productos.css']
 })
 export class Productos {
 
-  productos = [
-
-    {
-      id: 1,
-      nombre: 'Laptop',
-      precio: 2500,
-      stock: 10
-    },
-
-    {
-      id: 2,
-      nombre: 'Mouse',
-      precio: 50,
-      stock: 25
-    },
-
-    {
-      id: 3,
-      nombre: 'Teclado',
-      precio: 120,
-      stock: 15
-    }
-
+  // ── Estado ──
+  productos: Producto[] = [
+    { id: 1, nombre: 'Arroz extra 5kg',    precio: 18.50, stock: 42 },
+    { id: 2, nombre: 'Aceite vegetal 1L',  precio: 7.90,  stock: 8  },
+    { id: 3, nombre: 'Azúcar rubia 1kg',   precio: 3.20,  stock: 0  },
+    { id: 4, nombre: 'Harina sin preparar',precio: 4.50,  stock: 30 },
+    { id: 5, nombre: 'Leche evaporada',    precio: 3.80,  stock: 5  },
   ];
 
-  nuevoNombre = '';
-  nuevoPrecio = 0;
-  nuevoStock = 0;
+  private nextId = 6;
 
-  editandoId: number | null = null;
   buscarTexto = '';
 
+  // ── Formulario modal ──
+  editandoId: number | null = null;
+  nuevoNombre = '';
+  nuevoPrecio: number | null = null;
+  nuevoStock:  number | null = null;
+
+  // ── Toast ──
+  toastVisible = false;
+  toastMsg = '';
+  private toastTimer: any;
+
+  // ── Computed ──
+  productosFiltrados(): Producto[] {
+    const q = this.buscarTexto.toLowerCase();
+    return this.productos.filter(p => p.nombre.toLowerCase().includes(q));
+  }
+
+  valorInventario(): number {
+    return this.productos.reduce((acc, p) => acc + p.precio * p.stock, 0);
+  }
+
+  stockBajo(): number {
+    return this.productos.filter(p => p.stock > 0 && p.stock <= 10).length;
+  }
+
+  sinStock(): number {
+    return this.productos.filter(p => p.stock === 0).length;
+  }
+
+  // ── Helpers de estilo ──
+  getStockClass(stock: number): string {
+    if (stock === 0)   return 'stock-empty';
+    if (stock <= 10)   return 'stock-low';
+    return 'stock-ok';
+  }
+
+  getStockIcon(stock: number): string {
+    if (stock === 0)   return 'ti-alert-circle';
+    if (stock <= 10)   return 'ti-alert-triangle';
+    return 'ti-check';
+  }
+
+  // ── Acciones ──
+  prepararNuevo() {
+    this.editandoId  = null;
+    this.nuevoNombre = '';
+    this.nuevoPrecio = null;
+    this.nuevoStock  = null;
+  }
+
+  editarProducto(producto: Producto) {
+    this.editandoId  = producto.id;
+    this.nuevoNombre = producto.nombre;
+    this.nuevoPrecio = producto.precio;
+    this.nuevoStock  = producto.stock;
+  }
+
   agregarProducto() {
+    if (!this.nuevoNombre.trim() || this.nuevoPrecio == null || this.nuevoStock == null) return;
 
-    if (this.editandoId) {
-
-      const producto = this.productos.find(
-        p => p.id === this.editandoId
-      );
-
-      if (producto) {
-
-        producto.nombre = this.nuevoNombre;
-        producto.precio = this.nuevoPrecio;
-        producto.stock = this.nuevoStock;
-
+    if (this.editandoId !== null) {
+      const idx = this.productos.findIndex(p => p.id === this.editandoId);
+      if (idx !== -1) {
+        this.productos[idx] = {
+          id:     this.editandoId,
+          nombre: this.nuevoNombre.trim(),
+          precio: this.nuevoPrecio,
+          stock:  this.nuevoStock,
+        };
       }
-
-      this.editandoId = null;
-
-      this.cerrarModal();
-
-      Swal.fire({
-        icon: 'success',
-        title: 'Producto actualizado',
-        text: 'Los datos fueron actualizados'
-      });
-
+      this.showToast('Producto actualizado');
     } else {
-
-      const nuevoProducto = {
-
-        id: this.productos.length + 1,
-        nombre: this.nuevoNombre,
+      this.productos.push({
+        id:     this.nextId++,
+        nombre: this.nuevoNombre.trim(),
         precio: this.nuevoPrecio,
-        stock: this.nuevoStock
-
-      };
-
-      this.productos.push(nuevoProducto);
-      this.cerrarModal();
-
-      Swal.fire({
-        icon: 'success',
-        title: 'Producto agregado',
-        text: 'El producto fue registrado correctamente'
+        stock:  this.nuevoStock,
       });
-
+      this.showToast('Producto agregado');
     }
 
-    this.nuevoNombre = '';
-    this.nuevoPrecio = 0;
-    this.nuevoStock = 0;
-
+    this.prepararNuevo();
   }
 
   eliminarProducto(id: number) {
-
-    Swal.fire({
-      title: '¿Eliminar producto?',
-      text: 'No podrás recuperarlo',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Sí, eliminar',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-
-      if (result.isConfirmed) {
-
-        this.productos = this.productos.filter(
-          producto => producto.id !== id
-        );
-
-        Swal.fire({
-          icon: 'success',
-          title: 'Eliminado',
-          text: 'Producto eliminado correctamente'
-        });
-
-      }
-
-    });
-
+    this.productos = this.productos.filter(p => p.id !== id);
+    this.showToast('Producto eliminado');
   }
 
-  editarProducto(producto: any) {
-
-    this.nuevoNombre = producto.nombre;
-    this.nuevoPrecio = producto.precio;
-    this.nuevoStock = producto.stock;
-
-    this.editandoId = producto.id;
-
-    const modal = document.getElementById('productoModal');
-
-    if (modal) {
-
-      modal.classList.add('show');
-      modal.style.display = 'block';
-
-    }
-
-
-
+  private showToast(msg: string) {
+    clearTimeout(this.toastTimer);
+    this.toastMsg     = msg;
+    this.toastVisible = true;
+    this.toastTimer   = setTimeout(() => (this.toastVisible = false), 2500);
   }
-
-  cerrarModal(){
-
-  const modal = document.getElementById('productoModal');
-
-  if(modal){
-
-    modal.classList.remove('show');
-    modal.setAttribute('style', 'display:none');
-
-  }
-
-}
-  get productosFiltrados() {
-
-    return this.productos.filter(producto =>
-
-      producto.nombre
-        .toLowerCase()
-        .includes(this.buscarTexto.toLowerCase())
-
-    );
-
-  }
-
-
-
 }

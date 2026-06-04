@@ -1,1 +1,244 @@
-<p>usuarios works!</p>
+<div class="usuarios-wrap">
+
+  <!-- ─── Header ─── -->
+  <div class="page-header">
+    <div class="title-block">
+      <div class="title-icon">
+        <i class="ti ti-users"></i>
+      </div>
+      <div>
+        <p class="page-title">Usuarios</p>
+        <p class="page-sub">Gestión de trabajadores y roles</p>
+      </div>
+    </div>
+    <button class="btn-new" (click)="prepararNuevo()">
+      <i class="ti ti-plus"></i> Nuevo usuario
+    </button>
+  </div>
+
+  <!-- ─── Stats ─── -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-label">Total usuarios</div>
+      <div class="stat-val green">{{ usuarios.length }}</div>
+      <div class="stat-trend">registrados</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Activos</div>
+      <div class="stat-val green">{{ totalActivos() }}</div>
+      <div class="stat-trend">en servicio</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Inactivos</div>
+      <div class="stat-val amber">{{ totalInactivos() }}</div>
+      <div class="stat-trend">sin acceso</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Roles</div>
+      <div class="stat-val">{{ totalRoles() }}</div>
+      <div class="stat-trend">distintos</div>
+    </div>
+  </div>
+
+  <!-- ─── Filters & Search ─── -->
+  <div class="controls-row">
+    <div class="search-wrap">
+      <i class="ti ti-search icon-search"></i>
+      <input type="text" [(ngModel)]="buscarTexto" placeholder="Buscar por nombre o correo...">
+    </div>
+
+    <div class="filter-chips">
+      <button class="chip" [class.active]="filtroRol === ''" (click)="filtroRol = ''">
+        Todos
+      </button>
+      @for (rol of roles; track rol.id) {
+        <button class="chip" [class.active]="filtroRol === rol.id" (click)="filtroRol = rol.id">
+          <i class="ti" [ngClass]="rol.icono"></i> {{ rol.nombre }}
+        </button>
+      }
+    </div>
+
+    <div class="filter-chips">
+      <button class="chip" [class.active]="filtroEstado === ''" (click)="filtroEstado = ''">Todos</button>
+      <button class="chip active-chip" [class.active]="filtroEstado === 'activo'" (click)="filtroEstado = 'activo'">
+        <i class="ti ti-circle-filled" style="font-size:8px"></i> Activos
+      </button>
+      <button class="chip inactive-chip" [class.active]="filtroEstado === 'inactivo'" (click)="filtroEstado = 'inactivo'">
+        <i class="ti ti-circle-filled" style="font-size:8px"></i> Inactivos
+      </button>
+    </div>
+  </div>
+
+  <!-- ─── Users Grid ─── -->
+  @if (usuariosFiltrados().length === 0) {
+    <div class="empty-state">
+      <i class="ti ti-users-off"></i>
+      <p>Sin usuarios para "<strong>{{ buscarTexto }}</strong>"</p>
+    </div>
+  }
+
+  <div class="users-grid">
+    @for (usuario of usuariosFiltrados(); track usuario.id) {
+      <div class="user-card" [class.inactive]="usuario.estado === 'inactivo'">
+
+        <div class="user-card-top">
+          <div class="avatar" [style.background]="getRolColor(usuario.rol).bg" [style.color]="getRolColor(usuario.rol).text">
+            {{ iniciales(usuario.nombre) }}
+          </div>
+          <div class="user-badge-wrap">
+            <span class="rol-badge" [ngClass]="'rol-' + usuario.rol">
+              <i class="ti" [ngClass]="getRolIcono(usuario.rol)"></i>
+              {{ getRolNombre(usuario.rol) }}
+            </span>
+            <span class="estado-dot" [class.activo]="usuario.estado === 'activo'" [class.inactivo]="usuario.estado === 'inactivo'"></span>
+          </div>
+        </div>
+
+        <div class="user-info">
+          <p class="user-name">{{ usuario.nombre }}</p>
+          <p class="user-email"><i class="ti ti-mail"></i> {{ usuario.correo }}</p>
+          <p class="user-phone"><i class="ti ti-phone"></i> {{ usuario.telefono || '—' }}</p>
+        </div>
+
+        <div class="user-meta">
+          <span class="meta-item"><i class="ti ti-calendar"></i> Desde {{ usuario.fechaIngreso }}</span>
+          <span class="estado-pill" [class.activo]="usuario.estado === 'activo'" [class.inactivo]="usuario.estado === 'inactivo'">
+            {{ usuario.estado === 'activo' ? 'Activo' : 'Inactivo' }}
+          </span>
+        </div>
+
+        <div class="user-actions">
+          <button class="btn-edit" (click)="editarUsuario(usuario)">
+            <i class="ti ti-edit"></i> Editar
+          </button>
+          <button class="btn-toggle" (click)="toggleEstado(usuario)">
+            <i class="ti" [ngClass]="usuario.estado === 'activo' ? 'ti-lock' : 'ti-lock-open'"></i>
+            {{ usuario.estado === 'activo' ? 'Desactivar' : 'Activar' }}
+          </button>
+          <button class="btn-del" (click)="eliminarUsuario(usuario.id)">
+            <i class="ti ti-trash"></i>
+          </button>
+        </div>
+
+      </div>
+    }
+  </div>
+
+</div>
+
+<!-- ─── Modal ─── -->
+@if (modalVisible) {
+  <div class="overlay" (click)="cerrarModal()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+
+      <div class="modal-head">
+        <div class="modal-title-block">
+          <div class="modal-icon">
+            <i class="ti" [ngClass]="editandoId ? 'ti-edit' : 'ti-user-plus'"></i>
+          </div>
+          <div>
+            <h3 class="modal-title">{{ editandoId ? 'Editar usuario' : 'Nuevo usuario' }}</h3>
+            <p class="modal-sub">{{ editandoId ? 'Modifica los datos del trabajador' : 'Completa el formulario para registrar' }}</p>
+          </div>
+        </div>
+        <button class="btn-close-m" (click)="cerrarModal()"><i class="ti ti-x"></i></button>
+      </div>
+
+      <div class="modal-body">
+
+        <!-- Avatar preview -->
+        <div class="avatar-preview-wrap">
+          <div class="avatar-preview" [style.background]="getRolColor(form.rol).bg" [style.color]="getRolColor(form.rol).text">
+            {{ iniciales(form.nombre || '?') }}
+          </div>
+          <div>
+            <p class="av-name">{{ form.nombre || 'Nombre del usuario' }}</p>
+            <p class="av-rol">{{ getRolNombre(form.rol) }}</p>
+          </div>
+        </div>
+
+        <!-- Form grid -->
+        <div class="form-grid">
+          <div class="form-group span-2">
+            <label class="form-label">Nombre completo *</label>
+            <input type="text" class="form-input" [(ngModel)]="form.nombre" placeholder="Ej: María López Ramos">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Correo electrónico *</label>
+            <div class="input-icon-wrap">
+              <i class="ti ti-mail"></i>
+              <input type="email" class="form-input has-icon" [(ngModel)]="form.correo" placeholder="correo@empresa.com">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Teléfono</label>
+            <div class="input-icon-wrap">
+              <i class="ti ti-phone"></i>
+              <input type="tel" class="form-input has-icon" [(ngModel)]="form.telefono" placeholder="987 654 321">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Rol *</label>
+            <div class="rol-selector">
+              @for (rol of roles; track rol.id) {
+                <button class="rol-option" [class.selected]="form.rol === rol.id" (click)="form.rol = rol.id">
+                  <i class="ti" [ngClass]="rol.icono"></i>
+                  <span>{{ rol.nombre }}</span>
+                </button>
+              }
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Estado</label>
+            <div class="estado-toggle">
+              <button class="estado-opt" [class.active-opt]="form.estado === 'activo'" (click)="form.estado = 'activo'">
+                <i class="ti ti-circle-check"></i> Activo
+              </button>
+              <button class="estado-opt" [class.inactive-opt]="form.estado === 'inactivo'" (click)="form.estado = 'inactivo'">
+                <i class="ti ti-circle-x"></i> Inactivo
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Fecha de ingreso</label>
+            <div class="input-icon-wrap">
+              <i class="ti ti-calendar"></i>
+              <input type="date" class="form-input has-icon" [(ngModel)]="form.fechaIngreso">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">DNI</label>
+            <div class="input-icon-wrap">
+              <i class="ti ti-id-badge"></i>
+              <input type="text" class="form-input has-icon" [(ngModel)]="form.dni" placeholder="12345678" maxlength="8">
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="modal-foot">
+        <button class="btn-cancel" (click)="cerrarModal()">Cancelar</button>
+        <button class="btn-save" (click)="guardarUsuario()">
+          <i class="ti ti-check"></i>
+          {{ editandoId ? 'Guardar cambios' : 'Registrar usuario' }}
+        </button>
+      </div>
+
+    </div>
+  </div>
+}
+
+<!-- Toast -->
+@if (toastVisible) {
+  <div class="toast-custom">
+    <i class="ti ti-check"></i>
+    <span>{{ toastMsg }}</span>
+  </div>
+}

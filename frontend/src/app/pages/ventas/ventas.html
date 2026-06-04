@@ -1,1 +1,265 @@
-<p>ventas works!</p>
+<div class="ventas-wrap">
+
+  <!-- ─── Header ─── -->
+  <div class="page-header">
+    <div class="title-block">
+      <div class="title-icon">
+        <i class="ti ti-shopping-cart"></i>
+      </div>
+      <div>
+        <p class="page-title">Punto de Venta</p>
+        <p class="page-sub">Registro de ventas</p>
+      </div>
+    </div>
+    <div class="date-badge">
+      <i class="ti ti-calendar"></i>
+      <span>{{ fechaHoy }}</span>
+    </div>
+  </div>
+
+  <!-- ─── Stats ─── -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-label">Ventas hoy</div>
+      <div class="stat-val green">{{ ventas.length }}</div>
+      <div class="stat-trend">transacciones</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Ingresos hoy</div>
+      <div class="stat-val green">S/ {{ totalIngresos() | number:'1.2-2' }}</div>
+      <div class="stat-trend">total cobrado</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Ticket promedio</div>
+      <div class="stat-val">S/ {{ ticketPromedio() | number:'1.2-2' }}</div>
+      <div class="stat-trend">por venta</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Ítems vendidos</div>
+      <div class="stat-val">{{ totalItemsVendidos() }}</div>
+      <div class="stat-trend">unidades</div>
+    </div>
+  </div>
+
+  <!-- ─── Main Grid ─── -->
+  <div class="main-grid">
+
+    <!-- Left: Products catalog -->
+    <div class="panel">
+      <div class="panel-head">
+        <span class="panel-title">Catálogo de productos</span>
+        <span class="panel-count">{{ productos.length }} productos</span>
+      </div>
+
+      <div class="search-wrap">
+        <i class="ti ti-search icon-search"></i>
+        <input type="text" [(ngModel)]="buscarProducto" placeholder="Buscar producto...">
+      </div>
+
+      <div class="products-grid">
+        @for (producto of productosFiltrados(); track producto.id) {
+          <div class="prod-card" [class.out]="producto.stock === 0" (click)="agregarAlCarrito(producto)">
+            <div class="prod-cat">{{ producto.categoria }}</div>
+            <div class="prod-name">{{ producto.nombre }}</div>
+            <div class="prod-price">S/ {{ producto.precio | number:'1.2-2' }}</div>
+            <div class="prod-stock-lbl" [ngClass]="getStockClass(producto.stock)">
+              {{ getStockLabel(producto.stock) }}
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Right: Cart -->
+    <div class="panel cart-panel">
+
+      <div class="panel-head">
+        <span class="panel-title"><i class="ti ti-shopping-cart"></i> Carrito</span>
+        <button class="btn-vaciar" (click)="vaciarCarrito()">Vaciar</button>
+      </div>
+
+      <!-- Cart items -->
+      <div class="cart-items">
+        @if (carrito.length === 0) {
+          <div class="cart-empty">
+            <i class="ti ti-shopping-cart-off"></i>
+            <span>Agrega productos al carrito</span>
+          </div>
+        }
+        @for (item of carrito; track item.id) {
+          <div class="cart-row">
+            <div class="cart-info">
+              <div class="cart-pname">{{ item.nombre }}</div>
+              <div class="cart-pprice">S/ {{ item.precio | number:'1.2-2' }} c/u</div>
+            </div>
+            <div class="cart-qty">
+              <button class="qty-btn" (click)="cambiarCantidad(item, -1)">
+                <i class="ti ti-minus"></i>
+              </button>
+              <span class="qty-val">{{ item.cantidad }}</span>
+              <button class="qty-btn" (click)="cambiarCantidad(item, 1)">
+                <i class="ti ti-plus"></i>
+              </button>
+            </div>
+            <span class="cart-subtotal">S/ {{ (item.precio * item.cantidad) | number:'1.2-2' }}</span>
+            <button class="btn-rm" (click)="quitarDelCarrito(item.id)">
+              <i class="ti ti-x"></i>
+            </button>
+          </div>
+        }
+      </div>
+
+      <!-- Customer & discount -->
+      <div class="form-section">
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label">Cliente (opcional)</label>
+            <input type="text" class="form-input" [(ngModel)]="cliente" placeholder="Nombre cliente">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Descuento (%)</label>
+            <input type="number" class="form-input" [(ngModel)]="descuento" min="0" max="100" placeholder="0">
+          </div>
+        </div>
+      </div>
+
+      <!-- Summary -->
+      <div class="cart-summary">
+        <div class="sum-row">
+          <span>Subtotal</span>
+          <span>S/ {{ subtotal() | number:'1.2-2' }}</span>
+        </div>
+        @if (descuento > 0) {
+          <div class="sum-row disc">
+            <span>Descuento ({{ descuento }}%)</span>
+            <span>-S/ {{ montoDescuento() | number:'1.2-2' }}</span>
+          </div>
+        }
+        <hr class="sum-divider">
+        <div class="sum-total">
+          <span class="sum-total-lbl">Total</span>
+          <span class="sum-total-val">S/ {{ total() | number:'1.2-2' }}</span>
+        </div>
+      </div>
+
+      <!-- Payment methods -->
+      <div class="pay-section">
+        <label class="form-label">Método de pago</label>
+        <div class="pay-methods">
+          <button class="pay-btn" [class.active]="metodoPago === 'efectivo'" (click)="metodoPago = 'efectivo'">
+            <i class="ti ti-cash"></i> Efectivo
+          </button>
+          <button class="pay-btn" [class.active]="metodoPago === 'tarjeta'" (click)="metodoPago = 'tarjeta'">
+            <i class="ti ti-credit-card"></i> Tarjeta
+          </button>
+          <button class="pay-btn" [class.active]="metodoPago === 'yape'" (click)="metodoPago = 'yape'">
+            <i class="ti ti-device-mobile"></i> Yape/Plin
+          </button>
+        </div>
+      </div>
+
+      <button class="btn-sell" [disabled]="carrito.length === 0" (click)="procesarVenta()">
+        <i class="ti ti-check"></i> Registrar venta
+      </button>
+
+    </div>
+  </div>
+
+  <!-- ─── History ─── -->
+  <div class="history-panel">
+    <div class="table-card">
+      <div class="panel-head" style="padding: 12px 16px;">
+        <span class="panel-title">Historial de ventas del día</span>
+      </div>
+
+      <table class="hist-table">
+        <thead>
+          <tr>
+            <th>#Venta</th>
+            <th>Hora</th>
+            <th>Cliente</th>
+            <th>Ítems</th>
+            <th>Pago</th>
+            <th>Total</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @if (ventas.length === 0) {
+            <tr>
+              <td colspan="7">
+                <div class="empty-hist">
+                  <i class="ti ti-receipt-off"></i>
+                  Sin ventas aún hoy
+                </div>
+              </td>
+            </tr>
+          }
+          @for (venta of ventas; track venta.id) {
+            <tr>
+              <td><span class="id-badge">#{{ venta.id }}</span></td>
+              <td>{{ venta.hora }}</td>
+              <td>{{ venta.cliente }}</td>
+              <td>{{ totalItemsVenta(venta) }} uds.</td>
+              <td>
+                <span class="pay-chip" [ngClass]="getPayClass(venta.metodoPago)">
+                  <i class="ti" [ngClass]="getPayIcon(venta.metodoPago)"></i>
+                  {{ getPayLabel(venta.metodoPago) }}
+                </span>
+              </td>
+              <td><span class="hist-total">S/ {{ venta.total | number:'1.2-2' }}</span></td>
+              <td>
+                <button class="btn-receipt" (click)="verTicket(venta)">
+                  <i class="ti ti-receipt"></i> Ver
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- ─── Ticket Modal ─── -->
+@if (ticketVisible) {
+  <div class="overlay" (click)="cerrarTicket()">
+    <div class="ticket-box" (click)="$event.stopPropagation()">
+      <h4>🧾 Comprobante de Venta</h4>
+      <div class="ticket-info">Venta #{{ ticketActual?.id }} · {{ ticketActual?.hora }} · {{ ticketActual?.cliente }}</div>
+      <hr class="ticket-divider">
+      @for (item of ticketActual?.items; track item.id) {
+        <div class="ticket-row">
+          <span>{{ item.nombre }} x{{ item.cantidad }}</span>
+          <span>S/ {{ (item.precio * item.cantidad) | number:'1.2-2' }}</span>
+        </div>
+      }
+      <hr class="ticket-divider">
+      <div class="ticket-row"><span>Subtotal</span><span>S/ {{ ticketActual?.subtotal | number:'1.2-2' }}</span></div>
+      @if ((ticketActual?.descuento ?? 0) > 0) {
+        <div class="ticket-row disc">
+          <span>Descuento {{ ticketActual?.descuento }}%</span>
+          <span>-S/ {{ ticketActual?.montoDescuento | number:'1.2-2' }}</span>
+        </div>
+      }
+      <div class="ticket-total">
+        <span>TOTAL</span>
+        <span>S/ {{ ticketActual?.total | number:'1.2-2' }}</span>
+      </div>
+      <div class="ticket-footer">¡Gracias por su compra!</div>
+      <div class="ticket-actions">
+        <button class="t-close" (click)="cerrarTicket()">Cerrar</button>
+        <button class="t-print" (click)="cerrarTicket()"><i class="ti ti-printer"></i> Imprimir</button>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- Toast -->
+@if (toastVisible) {
+  <div class="toast-custom">
+    <i class="ti ti-check"></i>
+    <span>{{ toastMsg }}</span>
+  </div>
+}

@@ -1,177 +1,150 @@
-<div class="container-fluid p-4">
+<div class="prod-wrap">
 
-  <div class="d-flex justify-content-between align-items-center mb-4">
-
-    <h2>
-      Productos
-    </h2>
-
-    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productoModal">
-      + Nuevo Producto
+  <!-- Header -->
+  <div class="prod-header">
+    <div class="prod-title-block">
+      <div class="prod-icon">
+        <i class="ti ti-package"></i>
+      </div>
+      <div>
+        <p class="prod-title">Productos</p>
+        <p class="prod-subtitle">Gestión de inventario</p>
+      </div>
+    </div>
+    <button class="btn-new" data-bs-toggle="modal" data-bs-target="#productoModal" (click)="prepararNuevo()">
+      <i class="ti ti-plus"></i> Nuevo producto
     </button>
-
-    <div class="mt-3">
-
-      <input type="text" class="form-control" placeholder="Buscar producto..." [(ngModel)]="buscarTexto">
-
-    </div>
-
   </div>
 
-  <div class="card shadow">
-
-    <div class="card-body">
-
-      <table class="table table-hover">
-
-        <thead class="table-dark">
-
-          <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Stock</th>
-            <th>Acciones</th>
-          </tr>
-
-        </thead>
-
-        <tbody>
-
-          @for(producto of productosFiltrados; track producto.id){
-
-          <tr>
-
-            <td>{{ producto.id }}</td>
-
-            <td>{{ producto.nombre }}</td>
-
-            <td>
-              S/ {{ producto.precio }}
-            </td>
-
-            <td>
-              {{ producto.stock }}
-            </td>
-
-            <td>
-
-              <button class="btn btn-warning btn-sm me-2" (click)="editarProducto(producto)">
-                Editar
-              </button>
-
-              <button class="btn btn-danger btn-sm" (click)="eliminarProducto(producto.id)">
-                Eliminar
-              </button>
-
-            </td>
-
-          </tr>
-
-          }
-
-        </tbody>
-
-      </table>
-
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-label">Total productos</div>
+      <div class="stat-val">{{ productos.length }}</div>
     </div>
+    <div class="stat-card">
+      <div class="stat-label">Valor inventario</div>
+      <div class="stat-val green">S/ {{ valorInventario() | number:'1.0-0' }}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Stock bajo</div>
+      <div class="stat-val amber">{{ stockBajo() }}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Sin stock</div>
+      <div class="stat-val red">{{ sinStock() }}</div>
+    </div>
+  </div>
 
+  <!-- Search -->
+  <div class="prod-controls">
+    <div class="search-wrap">
+      <i class="ti ti-search"></i>
+      <input type="text" placeholder="Buscar por nombre..." [(ngModel)]="buscarTexto">
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="table-card">
+    <table class="prod-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Stock</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @if (productosFiltrados().length === 0) {
+          <tr>
+            <td colspan="5">
+              <div class="empty-state">
+                <i class="ti ti-mood-empty"></i>
+                Sin resultados para "<strong>{{ buscarTexto }}</strong>"
+              </div>
+            </td>
+          </tr>
+        }
+        @for (producto of productosFiltrados(); track producto.id) {
+          <tr>
+            <td><span class="id-badge">#{{ producto.id }}</span></td>
+            <td><span class="prod-name">{{ producto.nombre }}</span></td>
+            <td><span class="price">S/ {{ producto.precio | number:'1.2-2' }}</span></td>
+            <td>
+              <span class="stock-pill" [ngClass]="getStockClass(producto.stock)">
+                <i class="ti" [ngClass]="getStockIcon(producto.stock)"></i>
+                {{ producto.stock }} uds.
+              </span>
+            </td>
+            <td>
+              <div class="actions">
+                <button class="btn-edit"
+                  data-bs-toggle="modal"
+                  data-bs-target="#productoModal"
+                  (click)="editarProducto(producto)">
+                  <i class="ti ti-edit"></i> Editar
+                </button>
+                <button class="btn-del" (click)="eliminarProducto(producto.id)">
+                  <i class="ti ti-trash"></i> Eliminar
+                </button>
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
   </div>
 
 </div>
 
-<div
-    class="modal fade"
-    id="productoModal"
-    tabindex="-1"
->
+<!-- Modal -->
+<div class="modal fade" id="productoModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content modal-custom">
 
-    <div class="modal-dialog">
+      <div class="modal-head">
+        <h3 class="modal-title-custom">
+          {{ editandoId ? 'Editar producto' : 'Nuevo producto' }}
+        </h3>
+        <button type="button" class="btn-close-m" data-bs-dismiss="modal">
+          <i class="ti ti-x"></i>
+        </button>
+      </div>
 
-        <div class="modal-content">
-
-            <div class="modal-header">
-
-                <h5 class="modal-title">
-
-                    {{ editandoId ? 'Editar Producto' : 'Nuevo Producto' }}
-
-                </h5>
-
-                <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                ></button>
-
-            </div>
-
-            <div class="modal-body">
-
-                <div class="mb-3">
-
-                    <label class="form-label">
-                        Nombre
-                    </label>
-
-                    <input
-                        type="text"
-                        class="form-control"
-                        [(ngModel)]="nuevoNombre"
-                    >
-
-                </div>
-
-                <div class="mb-3">
-
-                    <label class="form-label">
-                        Precio
-                    </label>
-
-                    <input
-                        type="number"
-                        class="form-control"
-                        [(ngModel)]="nuevoPrecio"
-                    >
-
-                </div>
-
-                <div class="mb-3">
-
-                    <label class="form-label">
-                        Stock
-                    </label>
-
-                    <input
-                        type="number"
-                        class="form-control"
-                        [(ngModel)]="nuevoStock"
-                    >
-
-                </div>
-
-            </div>
-
-            <div class="modal-footer">
-
-                <button
-                    class="btn btn-secondary"
-                    data-bs-dismiss="modal"
-                >
-                    Cancelar
-                </button>
-
-                <button
-                    class="btn btn-success"
-                    (click)="agregarProducto()"
-                >
-                    Guardar
-                </button>
-
-            </div>
-
+      <div class="modal-body-custom">
+        <div class="form-group">
+          <label>Nombre del producto</label>
+          <input type="text" [(ngModel)]="nuevoNombre" placeholder="Ej: Arroz 5kg">
         </div>
+        <div class="form-row-2">
+          <div class="form-group">
+            <label>Precio (S/)</label>
+            <input type="number" [(ngModel)]="nuevoPrecio" placeholder="0.00" min="0" step="0.01">
+          </div>
+          <div class="form-group">
+            <label>Stock</label>
+            <input type="number" [(ngModel)]="nuevoStock" placeholder="0" min="0">
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-foot">
+        <button class="btn-cancel" data-bs-dismiss="modal">Cancelar</button>
+        <button class="btn-save" (click)="agregarProducto()" data-bs-dismiss="modal">
+          Guardar producto
+        </button>
+      </div>
 
     </div>
-
+  </div>
 </div>
+
+<!-- Toast -->
+@if (toastVisible) {
+  <div class="toast-custom show">
+    <i class="ti ti-check"></i>
+    <span>{{ toastMsg }}</span>
+  </div>
+}
