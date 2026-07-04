@@ -10,12 +10,15 @@ import { Login } from './pages/login/login';
 import { Adminlayout } from './layout/admin-layout/admin-layout';
 
 export const routes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+
   { path: 'login', component: Login },
+
   {
     path: '',
     component: Adminlayout,
     children: [
-      { path: '', component: Dashboard },
+      { path: 'dashboard', component: Dashboard },
       { path: 'productos', component: Productos },
       { path: 'ventas', component: Ventas },
       { path: 'usuarios', component: Usuarios },
@@ -23,5 +26,6 @@ export const routes: Routes = [
       { path: 'configuracion', component: Configuracion }
     ]
   },
+
   { path: '**', redirectTo: 'login' }
 ];
