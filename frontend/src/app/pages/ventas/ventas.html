@@ -1,257 +1,371 @@
 <div class="ventas-page">
 
-    <!-- Cabecera -->
-    <div class="pg-head">
-        <div>
-            <div class="pg-title">Ventas</div>
-            <div class="pg-sub">Registro y gestión de ventas · Bodega</div>
+  <!-- Cabecera -->
+  <div class="pg-head">
+    <div>
+      <div class="pg-title">Ventas</div>
+      <div class="pg-sub">Registro y gestión de ventas · Bodega</div>
+    </div>
+    <button class="btn-new">
+      <i class="ti ti-plus" style="font-size:15px;"></i>
+      Nueva Venta
+    </button>
+  </div>
+
+  <!-- Métricas -->
+  <div class="mets">
+    <div class="met">
+      <div class="met-stripe" style="background:#394a74;"></div>
+      <div class="met-lbl">Ventas hoy</div>
+      <div class="met-val">
+        {{ ventasHoy }}
+      </div>
+      <div class="met-sub up">↑ S/ 3,500 recaudado</div>
+    </div>
+    <div class="met">
+      <div class="met-stripe" style="background:#7b93c4;"></div>
+      <div class="met-lbl">Ticket promedio</div>
+      <div class="met-val">
+        S/ {{ ticketPromedio | number:'1.2-2' }}
+      </div>
+      <div class="met-sub up">↑ +8% vs ayer</div>
+    </div>
+    <div class="met">
+      <div class="met-stripe" style="background:#a8b8d4;"></div>
+      <div class="met-lbl">Pendientes</div>
+      <div class="met-val">
+        {{ pendientes }}
+      </div>
+      <div class="met-sub warn">Por cobrar</div>
+    </div>
+    <div class="met">
+      <div class="met-stripe" style="background:#3a5a8c;"></div>
+      <div class="met-lbl">Ventas del mes</div>
+      <div class="met-val">
+        S/ {{ ventasMes | number:'1.2-2' }}
+      </div>
+      <div class="met-sub up">↑ +12% vs anterior</div>
+    </div>
+  </div>
+
+  <!-- Grid principal -->
+  <div class="grid-main">
+
+    <!-- Historial -->
+    <div class="historial">
+      <div class="hist-head">
+        <div class="card-title">
+          <i class="ti ti-history" style="font-size:15px;"></i>
+          Historial de ventas
         </div>
-        <button class="btn-new">
-            <i class="ti ti-plus" style="font-size:15px;"></i>
-            Nueva Venta
-        </button>
+        <div class="search-box">
+          <i class="ti ti-search" style="font-size:14px;color:#b0baca;"></i>
+          <input type="text" placeholder="Buscar cliente o producto...">
+        </div>
+      </div>
+
+      <div class="filter-row">
+        <div class="filter-chip on">Todos</div>
+        <div class="filter-chip">Hoy</div>
+        <div class="filter-chip">Esta semana</div>
+        <div class="filter-chip">Este mes</div>
+        <div class="filter-chip">Pagado</div>
+        <div class="filter-chip">Pendiente</div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Cliente</th>
+            <th>Productos</th>
+            <th>Total</th>
+            <th>Método</th>
+            <th>Estado</th>
+            <th>Fecha</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr *ngFor="let venta of ventas">
+
+            <td class="id-cell">
+              #{{ venta.id }}
+            </td>
+
+            <td>
+              <div class="client-cell">
+
+                <div class="av a1">
+                  {{ venta.cliente ? venta.cliente.charAt(0) : 'C' }}
+                </div>
+
+                {{ venta.cliente || 'Cliente General' }}
+
+              </div>
+            </td>
+
+            <td>
+              Venta registrada
+            </td>
+
+            <td class="amt-cell">
+              S/ {{ venta.total }}
+            </td>
+
+            <td>
+              {{ venta.metodo_pago }}
+            </td>
+
+            <td>
+
+              <span class="st" [ngClass]="{
+          'st-ok': venta.estado === 'Pagado',
+          'st-pen': venta.estado === 'Pendiente'
+        }">
+
+                {{ venta.estado }}
+
+              </span>
+
+            </td>
+
+            <td class="date-cell">
+              {{ venta.fecha | date:'dd/MM/yyyy HH:mm' }}
+            </td>
+
+            <td>
+              <div class="acts">
+
+                <button class="act-btn" (click)="verDetalle(venta.id)">
+                  <i class="ti ti-eye"></i>
+                </button>ton>
+
+              </div>
+            </td>
+
+          </tr>
+
+        </tbody>
+      </table>
     </div>
 
-    <!-- Métricas -->
-    <div class="mets">
-        <div class="met">
-            <div class="met-stripe" style="background:#394a74;"></div>
-            <div class="met-lbl">Ventas hoy</div>
-            <div class="met-val">24</div>
-            <div class="met-sub up">↑ S/ 3,500 recaudado</div>
-        </div>
-        <div class="met">
-            <div class="met-stripe" style="background:#7b93c4;"></div>
-            <div class="met-lbl">Ticket promedio</div>
-            <div class="met-val">S/ 145</div>
-            <div class="met-sub up">↑ +8% vs ayer</div>
-        </div>
-        <div class="met">
-            <div class="met-stripe" style="background:#a8b8d4;"></div>
-            <div class="met-lbl">Pendientes</div>
-            <div class="met-val">3</div>
-            <div class="met-sub warn">Por cobrar</div>
-        </div>
-        <div class="met">
-            <div class="met-stripe" style="background:#3a5a8c;"></div>
-            <div class="met-lbl">Ventas del mes</div>
-            <div class="met-val">S/ 18,900</div>
-            <div class="met-sub up">↑ +12% vs anterior</div>
-        </div>
-    </div>
+    <!-- Panel nueva venta -->
+    <div class="panel-venta">
+      <div class="pv-title">
+        <i class="ti ti-shopping-cart-plus" style="font-size:15px;"></i>
+        Nueva Venta
+      </div>
 
-    <!-- Grid principal -->
-    <div class="grid-main">
+      <div class="form-grp">
+        <label class="form-lbl">Cliente</label>
+        <input class="form-inp" type="text" [(ngModel)]="cliente" placeholder="Nombre del cliente">
+      </div>
 
-        <!-- Historial -->
-        <div class="historial">
-            <div class="hist-head">
-                <div class="card-title">
-                    <i class="ti ti-history" style="font-size:15px;"></i>
-                    Historial de ventas
-                </div>
-                <div class="search-box">
-                    <i class="ti ti-search" style="font-size:14px;color:#b0baca;"></i>
-                    <input type="text" placeholder="Buscar cliente o producto...">
-                </div>
+      <div class="form-grp">
+        <label class="form-lbl">Producto</label>
+
+        <select class="form-select" [(ngModel)]="productoSeleccionado">
+
+          <option [value]="0">
+            Seleccionar producto
+          </option>
+
+          <option *ngFor="let producto of productos" [value]="producto.id">
+
+            {{ producto.nombre }}
+            (Stock: {{ producto.stock_actual }})
+            - S/ {{ producto.precio_venta }}
+
+          </option>
+
+        </select>
+      </div>
+
+      <div class="form-grp">
+        <label class="form-lbl">Cantidad</label>
+
+        <input class="form-inp" type="number" [(ngModel)]="cantidad" min="1">
+      </div>
+
+      <button class="btn-guardar" type="button" (click)="agregarProducto()">
+
+        Agregar Producto
+
+      </button>
+
+
+      <div class="form-grp">
+
+        <label class="form-lbl">
+          Productos en venta
+        </label>
+
+        <div *ngFor="let item of carrito; let i = index" class="producto-item">
+
+          <div>
+
+            <div class="pi-name">
+              {{ item.nombre }}
             </div>
 
-            <div class="filter-row">
-                <div class="filter-chip on">Todos</div>
-                <div class="filter-chip">Hoy</div>
-                <div class="filter-chip">Esta semana</div>
-                <div class="filter-chip">Este mes</div>
-                <div class="filter-chip">Pagado</div>
-                <div class="filter-chip">Pendiente</div>
+            <div class="pi-qty">
+              x{{ item.cantidad }}
             </div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Cliente</th>
-                        <th>Productos</th>
-                        <th>Total</th>
-                        <th>Método</th>
-                        <th>Estado</th>
-                        <th>Fecha</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="id-cell">#0024</td>
-                        <td>
-                            <div class="client-cell">
-                                <div class="av a1">JP</div> Juan Pérez
-                            </div>
-                        </td>
-                        <td>Laptop, Mouse</td>
-                        <td class="amt-cell">S/ 2,580</td>
-                        <td><i class="ti ti-cash" style="font-size:13px;color:#b0baca;"></i> Efectivo</td>
-                        <td><span class="st st-ok">Pagado</span></td>
-                        <td class="date-cell">Hoy 10:32</td>
-                        <td>
-                            <div class="acts">
-                                <button class="act-btn"><i class="ti ti-eye"></i></button>
-                                <button class="act-btn"><i class="ti ti-printer"></i></button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="id-cell">#0023</td>
-                        <td>
-                            <div class="client-cell">
-                                <div class="av a2">AT</div> Ana Torres
-                            </div>
-                        </td>
-                        <td>Teclado</td>
-                        <td class="amt-cell">S/ 180</td>
-                        <td><i class="ti ti-credit-card" style="font-size:13px;color:#b0baca;"></i> Tarjeta</td>
-                        <td><span class="st st-ok">Pagado</span></td>
-                        <td class="date-cell">Hoy 09:15</td>
-                        <td>
-                            <div class="acts">
-                                <button class="act-btn"><i class="ti ti-eye"></i></button>
-                                <button class="act-btn"><i class="ti ti-printer"></i></button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="id-cell">#0022</td>
-                        <td>
-                            <div class="client-cell">
-                                <div class="av a3">CR</div> Carlos Ruiz
-                            </div>
-                        </td>
-                        <td>Monitor</td>
-                        <td class="amt-cell">S/ 900</td>
-                        <td><i class="ti ti-device-mobile" style="font-size:13px;color:#b0baca;"></i> Yape</td>
-                        <td><span class="st st-pen">Pendiente</span></td>
-                        <td class="date-cell">Ayer 16:40</td>
-                        <td>
-                            <div class="acts">
-                                <button class="act-btn"><i class="ti ti-eye"></i></button>
-                                <button class="act-btn"><i class="ti ti-printer"></i></button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="id-cell">#0021</td>
-                        <td>
-                            <div class="client-cell">
-                                <div class="av a4">ML</div> María López
-                            </div>
-                        </td>
-                        <td>Audífonos, Cable</td>
-                        <td class="amt-cell">S/ 320</td>
-                        <td><i class="ti ti-cash" style="font-size:13px;color:#b0baca;"></i> Efectivo</td>
-                        <td><span class="st st-ok">Pagado</span></td>
-                        <td class="date-cell">Ayer 14:20</td>
-                        <td>
-                            <div class="acts">
-                                <button class="act-btn"><i class="ti ti-eye"></i></button>
-                                <button class="act-btn"><i class="ti ti-printer"></i></button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="id-cell">#0020</td>
-                        <td>
-                            <div class="client-cell">
-                                <div class="av a5">RG</div> Rosa Gomez
-                            </div>
-                        </td>
-                        <td>Laptop</td>
-                        <td class="amt-cell">S/ 2,500</td>
-                        <td><i class="ti ti-credit-card" style="font-size:13px;color:#b0baca;"></i> Tarjeta</td>
-                        <td><span class="st st-an">Anulado</span></td>
-                        <td class="date-cell">02 Jun</td>
-                        <td>
-                            <div class="acts">
-                                <button class="act-btn"><i class="ti ti-eye"></i></button>
-                                <button class="act-btn"><i class="ti ti-printer"></i></button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+          </div>
 
-        <!-- Panel nueva venta -->
-        <div class="panel-venta">
-            <div class="pv-title">
-                <i class="ti ti-shopping-cart-plus" style="font-size:15px;"></i>
-                Nueva Venta
+          <div style="display:flex;align-items:center;gap:8px;">
+
+            <div class="pi-price">
+              S/ {{ item.subtotal }}
             </div>
 
-            <div class="form-grp">
-                <label class="form-lbl">Cliente</label>
-                <input class="form-inp" type="text" placeholder="Nombre del cliente (opcional)">
-            </div>
+            <button class="pi-del" (click)="eliminarDelCarrito(i)">
 
-            <div class="form-grp">
-                <label class="form-lbl">Agregar producto</label>
-                <div class="form-row">
-                    <input class="form-inp" type="text" placeholder="Buscar producto...">
-                    <input class="form-inp" type="number" placeholder="Cant." min="1" value="1">
-                </div>
-            </div>
+              ×
 
-            <div class="form-grp">
-                <label class="form-lbl">Productos en venta</label>
-                <div class="producto-item">
-                    <div>
-                        <div class="pi-name">Laptop HP</div>
-                        <div class="pi-qty">x1 unidad</div>
-                    </div>
-                    <div style="display:flex;align-items:center;gap:8px;">
-                        <div class="pi-price">S/ 2,500</div>
-                        <button class="pi-del">×</button>
-                    </div>
-                </div>
-                <div class="producto-item">
-                    <div>
-                        <div class="pi-name">Mouse Logitech</div>
-                        <div class="pi-qty">x2 unidades</div>
-                    </div>
-                    <div style="display:flex;align-items:center;gap:8px;">
-                        <div class="pi-price">S/ 160</div>
-                        <button class="pi-del">×</button>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="divider">
-
-            <div class="total-row">
-                <div class="total-lbl">Total a cobrar</div>
-                <div class="total-val">S/ 2,660</div>
-            </div>
-
-            <div class="form-grp">
-                <label class="form-lbl">Método de pago</label>
-                <div class="pago-opts">
-                    <div class="pago-btn sel">
-                        <i class="ti ti-cash" style="font-size:16px;display:block;margin-bottom:3px;"></i>
-                        Efectivo
-                    </div>
-                    <div class="pago-btn">
-                        <i class="ti ti-credit-card" style="font-size:16px;display:block;margin-bottom:3px;"></i>
-                        Tarjeta
-                    </div>
-                    <div class="pago-btn">
-                        <i class="ti ti-device-mobile" style="font-size:16px;display:block;margin-bottom:3px;"></i>
-                        Yape
-                    </div>
-                </div>
-            </div>
-
-            <button class="btn-cobrar">
-                <i class="ti ti-check" style="font-size:15px;vertical-align:-2px;"></i>
-                Registrar Venta · S/ 2,660
             </button>
+
+          </div>
+
         </div>
 
+      </div>
+
+      <hr class="divider">
+
+      <div class="total-row">
+        <div class="total-lbl">Total a cobrar</div>
+        <div class="total-val">
+          S/ {{ total }}
+        </div>
+      </div>
+
+      <div class="form-grp">
+
+        <label class="form-lbl">
+          Método de pago
+        </label>
+
+        <div class="pago-cards">
+
+          <div class="pago-card" [class.selected]="metodoPago === 'Efectivo'" (click)="metodoPago='Efectivo'">
+
+            <i class="ti ti-cash"></i>
+            <span>Efectivo</span>
+
+          </div>
+
+          <div class="pago-card" [class.selected]="metodoPago === 'Tarjeta'" (click)="metodoPago='Tarjeta'">
+
+            <i class="ti ti-credit-card"></i>
+            <span>Tarjeta</span>
+
+          </div>
+
+          <div class="pago-card" [class.selected]="metodoPago === 'Yape'" (click)="metodoPago='Yape'">
+
+            <i class="ti ti-device-mobile"></i>
+            <span>Yape</span>
+
+          </div>
+
+          <div class="pago-card" [class.selected]="metodoPago === 'Plin'" (click)="metodoPago='Plin'">
+
+            <i class="ti ti-brand-whatsapp"></i>
+            <span>Plin</span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <button class="btn-cobrar" (click)="registrarVenta()">
+
+        <i class="ti ti-check" style="font-size:15px;vertical-align:-2px;">
+        </i>
+
+        Registrar Venta · S/ {{ total }}
+
+      </button>
     </div>
+
+  </div>
+</div>
+
+<div
+  class="modal-backdrop"
+  *ngIf="mostrarModalDetalle"
+>
+
+  <div class="modal-detalle">
+
+    <div class="modal-header">
+
+      <h3>
+        Venta #{{ ventaDetalle?.id }}
+      </h3>
+
+      <button
+        class="btn-close"
+        (click)="cerrarDetalle()"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div class="modal-body">
+
+      <p>
+        <strong>Cliente:</strong>
+        {{ ventaDetalle?.cliente }}
+      </p>
+
+      <p>
+        <strong>Método:</strong>
+        {{ ventaDetalle?.metodo_pago }}
+      </p>
+
+      <p>
+        <strong>Total:</strong>
+        S/ {{ ventaDetalle?.total }}
+      </p>
+
+      <hr>
+
+      <h4>Productos</h4>
+
+      <div
+        *ngFor="let detalle of ventaDetalle?.detalles"
+        class="detalle-item"
+      >
+
+        <div>
+
+          {{ detalle.producto.nombre }}
+
+        </div>
+
+        <div>
+
+          x{{ detalle.cantidad }}
+
+        </div>
+
+        <div>
+
+          S/ {{ detalle.subtotal }}
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </div>

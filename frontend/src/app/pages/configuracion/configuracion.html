@@ -56,7 +56,7 @@
           <div class="panel-title">Ajustes generales</div>
           <div class="panel-sub">Administra los valores principales de tu plataforma.</div>
         </div>
-        <button class="btn-pri">Guardar cambios</button>
+        <button class="btn-pri " (click)="guardarConfiguracion()">Guardar cambios</button>
       </div>
 
       <div class="setting-grid">
@@ -68,11 +68,11 @@
           <div class="field-row">
             <div class="field">
               <label>Nombre del negocio</label>
-              <input type="text" value="VentasPro" />
+              <input type="text" [(ngModel)]=" configuracion.nombre_negocio">
             </div>
             <div class="field">
               <label>Zona horaria</label>
-              <select>
+              <select [(ngModel)]="configuracion.zona_horaria">
                 <option>GMT-5 Lima</option>
                 <option>GMT-3 Buenos Aires</option>
                 <option>GMT-6 Ciudad de México</option>
@@ -86,10 +86,12 @@
             <span>Visibilidad</span>
             <strong>Preferencias UI</strong>
           </div>
+
           <div class="theme-list">
-            <button class="theme-pill active">Claro</button>
-            <button class="theme-pill">Oscuro</button>
-            <button class="theme-pill">Modern</button>
+            <button type="button" class="theme-pill" [class.active]="configuracion.tema=='Claro'"(click)="cambiarTema('Claro')">Claro</button>
+            <button type="button" class="theme-pill" [class.active]="configuracion.tema == 'Oscuro'" (click)="cambiarTema('Oscuro')"> Oscuro</button>
+            <button type="button" class="theme-pill" [class.active]="configuracion.tema == 'Modern'"(click)="cambiarTema('Modern')">Moderno</button>
+
           </div>
         </div>
 
@@ -104,7 +106,7 @@
               <p>Solicitar verificación adicional al iniciar sesión.</p>
             </div>
             <label class="switch">
-              <input type="checkbox" checked />
+              <input type="checkbox" [(ngModel)]="configuracion.login_seguro">
               <span class="slider"></span>
             </label>
           </div>
@@ -114,7 +116,7 @@
               <p>Envía avisos cuando alguien inicia sesión desde otro dispositivo.</p>
             </div>
             <label class="switch">
-              <input type="checkbox" />
+              <input type="checkbox" [(ngModel)]="configuracion.alerta_sesion" />
               <span class="slider"></span>
             </label>
           </div>
@@ -129,15 +131,15 @@
         <div class="aside-list">
           <div class="aside-row">
             <span>Ventas diarias</span>
-            <label class="switch"><input type="checkbox" checked /><span class="slider"></span></label>
+            <label class="switch"><input type="checkbox" [(ngModel)]="configuracion.notificar_ventas" /><span class="slider"></span></label>
           </div>
           <div class="aside-row">
             <span>Reportes semanales</span>
-            <label class="switch"><input type="checkbox" /><span class="slider"></span></label>
+            <label class="switch"><input type="checkbox" [(ngModel)]="configuracion.notificar_reportes" /><span class="slider"></span></label>
           </div>
           <div class="aside-row">
             <span>Alertas de inventario</span>
-            <label class="switch"><input type="checkbox" checked /><span class="slider"></span></label>
+            <label class="switch"><input type="checkbox" [(ngModel)]="configuracion.alerta_inventario" /><span class="slider"></span></label>
           </div>
         </div>
       </div>

@@ -1,176 +1,155 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import Swal from 'sweetalert2';
+import { ProductoService } from '../../services/producto';
 
 @Component({
   selector: 'app-productos',
   standalone: true,
-  imports: [FormsModule],
+  imports: [
+    CommonModule,
+    FormsModule
+  ],
   templateUrl: './productos.html',
-  styleUrls: ['./productos.css'],
+  styleUrls: ['./productos.css']
 })
-export class Productos {
+export class Productos implements OnInit {
 
-  productos = [
+  productos: any[] = [];
 
-    {
-      id: 1,
-      nombre: 'Laptop',
-      precio: 2500,
-      stock: 10
-    },
+  totalProductos = 0;
+  valorInventario = 0;
+  stockBajo = 0;
+  agotados = 0;
 
-    {
-      id: 2,
-      nombre: 'Mouse',
-      precio: 50,
-      stock: 25
-    },
+  modoEdicion = false;
+  productoEditandoId: number | null = null;
 
-    {
-      id: 3,
-      nombre: 'Teclado',
-      precio: 120,
-      stock: 15
-    }
+  nuevoProducto = this.inicializarProducto();
 
-  ];
+  constructor(private productoService: ProductoService) {}
 
-  nuevoNombre = '';
-  nuevoPrecio = 0;
-  nuevoStock = 0;
-
-  editandoId: number | null = null;
-  buscarTexto = '';
-
-  agregarProducto() {
-
-    if (this.editandoId) {
-
-      const producto = this.productos.find(
-        p => p.id === this.editandoId
-      );
-
-      if (producto) {
-
-        producto.nombre = this.nuevoNombre;
-        producto.precio = this.nuevoPrecio;
-        producto.stock = this.nuevoStock;
-
-      }
-
-      this.editandoId = null;
-
-      this.cerrarModal();
-
-      Swal.fire({
-        icon: 'success',
-        title: 'Producto actualizado',
-        text: 'Los datos fueron actualizados'
-      });
-
-    } else {
-
-      const nuevoProducto = {
-
-        id: this.productos.length + 1,
-        nombre: this.nuevoNombre,
-        precio: this.nuevoPrecio,
-        stock: this.nuevoStock
-
-      };
-
-      this.productos.push(nuevoProducto);
-      this.cerrarModal();
-
-      Swal.fire({
-        icon: 'success',
-        title: 'Producto agregado',
-        text: 'El producto fue registrado correctamente'
-      });
-
-    }
-
-    this.nuevoNombre = '';
-    this.nuevoPrecio = 0;
-    this.nuevoStock = 0;
-
+  ngOnInit(): void {
+    this.cargarProductos();
   }
 
-  eliminarProducto(id: number) {
+  // =========================
+  // LISTAR PRODUCTOS
+  // =========================
+  cargarProductos(): void {
+  this.productoService.obtenerProductos()
+    .subscribe({
+      next: (data) => {
 
-    Swal.fire({
-      title: '¿Eliminar producto?',
-      text: 'No podrás recuperarlo',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Sí, eliminar',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
+        this.productos = Array.isArray(data) ? data : [];
 
-      if (result.isConfirmed) {
 
-        this.productos = this.productos.filter(
-          producto => producto.id !== id
-        );
+        this.calcularMetricas();
 
-        Swal.fire({
-          icon: 'success',
-          title: 'Eliminado',
-          text: 'Producto eliminado correctamente'
-        });
-
-      }
-
+      },
+      error: (error) => console.log(error)
     });
-
-  }
-
-  editarProducto(producto: any) {
-
-    this.nuevoNombre = producto.nombre;
-    this.nuevoPrecio = producto.precio;
-    this.nuevoStock = producto.stock;
-
-    this.editandoId = producto.id;
-
-    const modal = document.getElementById('productoModal');
-
-    if (modal) {
-
-      modal.classList.add('show');
-      modal.style.display = 'block';
-
-    }
-
-
-
-  }
-
-  cerrarModal(){
-
-  const modal = document.getElementById('productoModal');
-
-  if(modal){
-
-    modal.classList.remove('show');
-    modal.setAttribute('style', 'display:none');
-
-  }
-
 }
-  get productosFiltrados() {
 
-    return this.productos.filter(producto =>
+  // =========================
+  // GUARDAR PRODUCTO
+  // =========================
+  guardarProducto(): void {
 
-      producto.nombre
-        .toLowerCase()
-        .includes(this.buscarTexto.toLowerCase())
+    this.productoService.crearProducto(this.nuevoProducto)
+      .subscribe({
+        next: (respuesta) => {
 
-    );
+          this.productos = [...this.productos, respuesta];
 
+          this.calcularMetricas();
+
+          this.nuevoProducto = this.inicializarProducto();
+        },
+        error: (error) => console.log(error)
+      });
   }
 
+  // =========================
+  // ELIMINAR
+  // =========================
+  eliminarProducto(id: number): void {
+    this.productoService.eliminarProducto(id)
+      .subscribe({
+        next: () => {
+          this.cargarProductos();
+        },
+        error: (error) => console.log(error)
+      });
+  }
 
+  // =========================
+  // EDITAR
+  // =========================
+  seleccionarProducto(producto: any): void {
+    this.nuevoProducto = { ...producto };
+    this.productoEditandoId = producto.id;
+    this.modoEdicion = true;
+  }
 
+  actualizarProducto(): void {
+
+    if (!this.productoEditandoId) return;
+
+    this.productoService.actualizarProducto(
+      this.productoEditandoId,
+      this.nuevoProducto
+    ).subscribe({
+      next: () => {
+
+        this.cargarProductos();
+
+        this.nuevoProducto = this.inicializarProducto();
+        this.modoEdicion = false;
+        this.productoEditandoId = null;
+      },
+      error: (error) => console.log(error)
+    });
+  }
+
+  // =========================
+  // MÉTRICAS
+  // =========================
+  calcularMetricas(): void {
+
+  this.totalProductos = this.productos.length;
+
+  this.valorInventario = this.productos.reduce((sum, p) => {
+    const precio = Number(p.precio_venta || 0);
+    const stock = Number(p.stock_actual || 0);
+    return sum + (precio * stock);
+  }, 0);
+
+  this.stockBajo = this.productos.filter(p =>
+    Number(p.stock_actual) > 0 &&
+    Number(p.stock_actual) <= Number(p.stock_minimo)
+  ).length;
+
+  this.agotados = this.productos.filter(p =>
+    Number(p.stock_actual) === 0
+  ).length;
+}
+
+  // =========================
+  // RESET FORM
+  // =========================
+  inicializarProducto() {
+    return {
+      codigo: '',
+      nombre: '',
+      marca_presentacion: '',
+      precio_venta: 0,
+      precio_costo: 0,
+      stock_actual: 0,
+      stock_minimo: 0,
+      categoria: '',
+      codigo_barras: '',
+      estado: 'OK'
+    };
+  }
 }

@@ -1,7 +1,114 @@
-/*You can add global styles to this file, and also import other style files*/
+/* You can add global styles to this file, and also import other style files */
 
 @import 'tailwindcss';
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 
+/* =====================================================
+   TEMA CLARO (POR DEFECTO)
+===================================================== */
+
+:root {
+
+  --bg: #edf0f7;
+
+  --card: #ffffff;
+
+  --card2: #f8fbff;
+
+  --texto: #0f172a;
+
+  --texto-sec: #64748b;
+
+  --borde: #e2e8f0;
+
+  --boton: #1e2d4f;
+
+  --boton-texto: #ffffff;
+  --hover: #f1f5f9;
+  --shadow: rgba(0, 0, 0, .08);
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+
+}
 
 
+
+/* =====================================================
+   TEMA OSCURO
+===================================================== */
+
+body.tema-oscuro {
+
+  --bg: #111827;
+
+  --card: #1f2937;
+
+  --card2: #273549;
+
+  --texto: #ffffff;
+
+  --texto-sec: #cbd5e1;
+
+  --borde: #374151;
+
+  --boton: #2563eb;
+
+  --boton-texto: #ffffff;
+
+  --hover: #273549;
+  --shadow: rgba(0, 0, 0, .35);
+
+}
+
+/* =====================================================
+   TEMA MODERNO
+===================================================== */
+
+body.tema-moderno {
+
+  --bg: #0f172a;
+
+  --card: #1e293b;
+
+  --card2: #334155;
+
+  --texto: #f8fafc;
+
+  --texto-sec: #cbd5e1;
+
+  --borde: #475569;
+
+  --boton: #0ea5e9;
+
+  --boton-texto: #ffffff;
+  --hover: #334155;
+  --shadow: rgba(0, 0, 0, .30);
+
+}
+
+/* =====================================================
+   ESTILOS GLOBALES
+===================================================== */
+
+body {
+
+  background: var(--bg);
+
+  color: var(--texto);
+
+  transition:
+    background .35s ease,
+    color .35s ease;
+
+}
+
+* {
+
+  transition:
+    background-color .30s ease,
+    color .30s ease,
+    border-color .30s ease,
+    box-shadow .30s ease;
+
+}

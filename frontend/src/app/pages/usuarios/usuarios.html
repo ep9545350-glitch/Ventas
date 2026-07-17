@@ -1,161 +1,215 @@
 <div class="usuarios-page">
 
-    <div class="pg-head">
-        <div>
-            <div class="pg-title">Usuarios</div>
-            <div class="pg-sub">Gestión de personal · Control de accesos</div>
-        </div>
-        <div class="head-btns">
-            <button class="btn-sec">
-                <i class="ti ti-download" style="font-size:14px;"></i> Exportar Lista
-            </button>
-        </div>
+  <div class="pg-head">
+    <div>
+      <div class="pg-title">Usuarios</div>
+      <div class="pg-sub">Gestión de personal · Control de accesos</div>
     </div>
-
-    <div class="mets">
-        <div class="met">
-            <div class="met-stripe" style="background:#4f46e5;"></div>
-            <div class="met-lbl">Total Personal</div>
-            <div class="met-val">12</div>
-            <div class="met-sub">Registrados en total</div>
-        </div>
-        <div class="met">
-            <div class="met-stripe" style="background:#10b981;"></div>
-            <div class="met-lbl">Usuarios Activos</div>
-            <div class="met-val">3</div>
-            <div class="met-sub up">En turno ahora</div>
-        </div>
-        <div class="met">
-            <div class="met-stripe" style="background:#f59e0b;"></div>
-            <div class="met-lbl">Administradores</div>
-            <div class="met-val">2</div>
-            <div class="met-sub warn">Acceso total</div>
-        </div>
-        <div class="met">
-            <div class="met-stripe" style="background:#ef4444;"></div>
-            <div class="met-lbl">Inactivos</div>
-            <div class="met-val">0</div>
-            <div class="met-sub" style="color:#ef4444;">Sin accesos</div>
-        </div>
+    <div class="head-btns">
+      <button class="btn-sec">
+        <i class="ti ti-download" style="font-size:14px;"></i> Exportar Lista
+      </button>
     </div>
+  </div>
 
-    <div class="grid-main">
+  <div class="mets">
+    <div class="met">
+      <div class="met-stripe" style="background:#4f46e5;"></div>
+      <div class="met-lbl">Total Personal</div>
+      <div class="met-val">
+        {{ totalUsuarios }}
+      </div>
+      <div class="met-sub">Registrados en total</div>
+    </div>
+    <div class="met">
+      <div class="met-stripe" style="background:#10b981;"></div>
+      <div class="met-lbl">Usuarios Activos</div>
+      <div class="met-val">
+        {{ totalUsuarios }}
+      </div>
+      <div class="met-sub up">En turno ahora</div>
+    </div>
+    <div class="met">
+      <div class="met-stripe" style="background:#f59e0b;"></div>
+      <div class="met-lbl">Administradores</div>
+      <div class="met-val">
+        {{ totalAdministradores }}
+      </div>
+      <div class="met-sub warn">Acceso total</div>
+    </div>
+    <div class="met">
+      <div class="met-stripe" style="background:#ef4444;"></div>
+      <div class="met-lbl">Inactivos</div>
+      <div class="met-val">0</div>
+      <div class="met-sub" style="color:#ef4444;">Sin accesos</div>
+    </div>
+  </div>
 
-        <div class="tabla-card">
-            <div class="card-head">
-                <div class="card-title">
-                    <i class="ti ti-users" style="font-size:15px;"></i> Lista de Usuarios
+  <div class="grid-main">
+
+    <div class="tabla-card">
+      <div class="card-head">
+        <div class="card-title">
+          <i class="ti ti-users" style="font-size:15px;"></i> Lista de Usuarios
+        </div>
+        <div class="search-box">
+          <i class="ti ti-search" style="font-size:14px;color:#b0baca;"></i>
+          <input type="text" placeholder="Buscar usuario...">
+        </div>
+      </div>
+
+      <div class="filter-row">
+        <div class="fc on">Todos</div>
+        <div class="fc">Administradores</div>
+        <div class="fc">Cajeros</div>
+        <div class="fc">Mozos / Personal</div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre y Rol</th>
+            <th>Correo Electrónico</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr *ngFor="let usuario of usuarios">
+
+            <td class="id-cell">
+              #USR{{ usuario.id }}
+            </td>
+
+            <td>
+
+              <div class="prod-cell">
+
+                <div class="prod-icon" style="background:#e0e7ff;
+                       color:#4f46e5;
+                       font-weight:600;
+                       font-family:'DM Sans';">
+
+                  {{ usuario.nombre.substring(0,1) }}
+
                 </div>
-                <div class="search-box">
-                    <i class="ti ti-search" style="font-size:14px;color:#b0baca;"></i>
-                    <input type="text" placeholder="Buscar usuario...">
+
+                <div>
+
+                  <div class="prod-name">
+
+                    {{ usuario.nombre }}
+
+                  </div>
+
+                  <div class="prod-code">
+
+                    Rol:
+                    {{ usuario.rol }}
+
+                  </div>
+
                 </div>
-            </div>
 
-            <div class="filter-row">
-                <div class="fc on">Todos</div>
-                <div class="fc">Administradores</div>
-                <div class="fc">Cajeros</div>
-                <div class="fc">Mozos / Personal</div>
-            </div>
+              </div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre y Rol</th>
-                        <th>Correo Electrónico</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="id-cell">#USR001</td>
-                        <td>
-                            <div class="prod-cell">
-                                <div class="prod-icon"
-                                    style="background:#e0e7ff; color:#4f46e5; font-weight:600; font-family:'DM Sans';">
-                                    JP</div>
-                                <div>
-                                    <div class="prod-name">Juan Pérez</div>
-                                    <div class="prod-code">Rol: Administrador</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td style="font-family:'DM Sans'; font-size:13px; color:#4a5568;">juan.perez@email.com</td>
-                        <td><span class="st st-ok">Activo</span></td>
-                        <td>
-                            <div class="acts">
-                                <button class="act-btn"><i class="ti ti-edit"></i></button>
-                                <button class="act-btn del"><i class="ti ti-trash"></i></button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="id-cell">#USR002</td>
-                        <td>
-                            <div class="prod-cell">
-                                <div class="prod-icon"
-                                    style="background:#dcfce7; color:#15803d; font-weight:600; font-family:'DM Sans';">
-                                    AT</div>
-                                <div>
-                                    <div class="prod-name">Ana Torres</div>
-                                    <div class="prod-code">Rol: Cajero</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td style="font-family:'DM Sans'; font-size:13px; color:#4a5568;">ana.t@email.com</td>
-                        <td><span class="st st-ok">Activo</span></td>
-                        <td>
-                            <div class="acts">
-                                <button class="act-btn"><i class="ti ti-edit"></i></button>
-                                <button class="act-btn del"><i class="ti ti-trash"></i></button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+            </td>
 
-        <div class="panel-form">
-            <div class="pf-title">
-                <i class="ti ti-user-plus" style="font-size:15px;"></i>
-                Nuevo Usuario
-            </div>
+            <td>
 
-            <div class="form-grp">
-                <label class="form-lbl">Nombre Completo</label>
-                <input class="form-inp" type="text" placeholder="Ej: Carlos Ruiz">
-            </div>
+              {{ usuario.email }}
 
-            <div class="form-grp">
-                <label class="form-lbl">Correo Electrónico</label>
-                <input class="form-inp" type="email" placeholder="Ej: carlos@email.com">
-            </div>
+            </td>
 
-            <div class="form-grp">
-                <label class="form-lbl">Contraseña</label>
-                <input class="form-inp" type="password" placeholder="••••••••">
-            </div>
+            <td>
 
-            <div class="form-grp">
-                <label class="form-lbl">Asignar Rol</label>
-                <select class="form-select">
-                    <option value="">Seleccionar rol...</option>
-                    <option>Administrador</option>
-                    <option>Cajero</option>
-                    <option>Personal / Mozo</option>
-                </select>
-            </div>
+              <span class="st st-ok">
 
-            <hr class="divider">
+                Activo
 
-            <button class="btn-guardar">
-                <i class="ti ti-check" style="font-size:14px;vertical-align:-2px;"></i>
-                Registrar Usuario
-            </button>
-        </div>
+              </span>
 
+            </td>
+
+            <td>
+
+              <div class="acts">
+
+                <button class="act-btn" (click)="editar(usuario)">
+
+                  <i class="ti ti-edit"></i>
+
+                </button>
+
+                <button class="act-btn del" (click)="eliminar(usuario.id)">
+
+                  <i class="ti ti-trash"></i>
+
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+      </table>
     </div>
+
+    <div class="panel-form">
+      <div class="pf-title">
+        <i class="ti ti-user-plus" style="font-size:15px;"></i>
+        Nuevo Usuario
+      </div>
+
+      <div class="form-grp">
+        <label class="form-lbl">Nombre Completo</label>
+        <input class="form-inp" type="text" [(ngModel)]="usuario.nombre">
+      </div>
+
+      <div class="form-grp">
+        <label class="form-lbl">Correo Electrónico</label>
+        <input class="form-inp" type="email" [(ngModel)]="usuario.email">
+      </div>
+
+      <div class="form-grp">
+        <label class="form-lbl">Contraseña</label>
+        <input class="form-inp" type="password" [(ngModel)]="usuario.password">
+      </div>
+
+      <div class="form-grp">
+        <label class="form-lbl">Asignar Rol</label>
+        <select class="form-select" [(ngModel)]="usuario.rol">
+
+          <option value="">
+            Seleccionar rol...
+          </option>
+
+          <option value="Administrador">
+            Administrador
+          </option>
+
+          <option value="Cajero">
+            Cajero
+          </option>
+
+          <option value="Personal">
+            Personal
+          </option>
+
+        </select>
+      </div>
+
+      <hr class="divider">
+
+      <button class="btn-guardar" (click)="guardarUsuario()">
+        <i class="ti ti-check" style="font-size:14px;vertical-align:-2px;"></i>
+        {{ usuarioEditando ? 'Actualizar Usuario' : 'Registrar Usuario' }}
+      </button>
+    </div>
+
+  </div>
 </div>

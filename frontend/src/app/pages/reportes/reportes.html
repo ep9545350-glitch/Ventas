@@ -37,7 +37,7 @@
                 <i class="ti ti-chart-line"></i>
             </div>
             <div class="rmet-lbl">Total Ventas</div>
-            <div class="rmet-val">S/ 18,900</div>
+            <div class="rmet-val">S/ {{ ventasTotales }}</div>
             <div class="rmet-sub up">↑ +8% vs mes anterior</div>
         </div>
         <div class="rmet" style="--rmet-color:#10b981;">
@@ -46,7 +46,7 @@
                 <i class="ti ti-receipt"></i>
             </div>
             <div class="rmet-lbl">Transacciones</div>
-            <div class="rmet-val">342</div>
+            <div class="rmet-val">{{ transacciones }}</div>
             <div class="rmet-sub up">↑ +15 vs mes anterior</div>
         </div>
         <div class="rmet" style="--rmet-color:#f59e0b;">
@@ -55,7 +55,7 @@
                 <i class="ti ti-star"></i>
             </div>
             <div class="rmet-lbl">Mejor Día</div>
-            <div class="rmet-val">Viernes</div>
+            <div class="rmet-val">{{ mejorDia }}</div>
             <div class="rmet-sub warn">S/ 3,200 promedio</div>
         </div>
         <div class="rmet" style="--rmet-color:#06b6d4;">
@@ -64,7 +64,7 @@
                 <i class="ti ti-user-check"></i>
             </div>
             <div class="rmet-lbl">Mejor Cajero</div>
-            <div class="rmet-val">Ana T.</div>
+            <div class="rmet-val">{{ mejorCajero }}</div>
             <div class="rmet-sub" style="color:#06b6d4;">S/ 9,440 en ventas</div>
         </div>
     </div>

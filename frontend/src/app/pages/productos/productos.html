@@ -5,6 +5,7 @@
     <div>
       <div class="pg-title">Productos</div>
       <div class="pg-sub">Gestión de inventario · Bodega</div>
+
     </div>
     <div class="head-btns">
       <button class="btn-sec">
@@ -18,30 +19,35 @@
 
   <!-- Métricas -->
   <div class="mets">
+
     <div class="met">
       <div class="met-stripe" style="background:#1e2d4f;"></div>
       <div class="met-lbl">Total productos</div>
-      <div class="met-val">48</div>
+      <div class="met-val">{{ totalProductos }}</div>
       <div class="met-sub">En inventario</div>
     </div>
+
     <div class="met">
       <div class="met-stripe" style="background:#7b93c4;"></div>
       <div class="met-lbl">Valor inventario</div>
-      <div class="met-val">S/ 12,400</div>
-      <div class="met-sub up">↑ +5% este mes</div>
+      <div class="met-val">S/ {{ valorInventario | number:'1.2-2' }}</div>
+      <div class="met-sub">Valor total</div>
     </div>
+
     <div class="met">
       <div class="met-stripe" style="background:#ea580c;"></div>
       <div class="met-lbl">Stock bajo</div>
-      <div class="met-val">6</div>
-      <div class="met-sub warn">Requieren atención</div>
+      <div class="met-val">{{ stockBajo }}</div>
+      <div class="met-sub">Requieren atención</div>
     </div>
+
     <div class="met">
       <div class="met-stripe" style="background:#dc2626;"></div>
       <div class="met-lbl">Agotados</div>
-      <div class="met-val">2</div>
-      <div class="met-sub danger">Sin stock</div>
+      <div class="met-val">{{ agotados }}</div>
+      <div class="met-sub">Sin stock</div>
     </div>
+
   </div>
 
   <!-- Grid principal -->
@@ -82,180 +88,67 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td class="id-cell">#P001</td>
+
+          <tr *ngFor="let producto of productos">
+
+            <td class="id-cell">
+              {{ producto.codigo }}
+            </td>
+
             <td>
               <div class="prod-cell">
-                <div class="prod-icon">🍚</div>
+
+                <div class="prod-icon">
+                  📦
+                </div>
+
                 <div>
-                  <div class="prod-name">Arroz Extra Superior</div>
-                  <div class="prod-code">1kg · Costeño</div>
+
+                  <div class="prod-name">
+                    {{ producto.nombre }}
+                  </div>
+
+                  <div class="prod-code">
+                    {{ producto.marca_presentacion }}
+                  </div>
+
                 </div>
+
               </div>
             </td>
-            <td><span class="cat-badge cb-alim">Alimentos</span></td>
-            <td class="price-cell">S/ 3.50</td>
+
             <td>
-              <div class="stock-cell">
-                <span style="font-size:12px;color:#1e2d4f;font-weight:500;width:24px;">42</span>
-                <div class="stock-bar">
-                  <div class="stock-fill" style="width:84%;background:#16a34a;"></div>
-                </div>
-              </div>
+              {{ producto.categoria }}
             </td>
-            <td><span class="st st-ok">OK</span></td>
+
+            <td class="price-cell">
+              S/ {{ producto.precio_venta }}
+            </td>
+
+            <td>
+              {{ producto.stock_actual }}
+            </td>
+
+            <td>
+              <span class="st st-ok">
+                {{ producto.estado }}
+              </span>
+            </td>
+
             <td>
               <div class="acts">
-                <button class="act-btn"><i class="ti ti-edit"></i></button>
-                <button class="act-btn del"><i class="ti ti-trash"></i></button>
+                <button class="act-btn" (click)="seleccionarProducto(producto)">
+                  <i class="ti ti-edit"></i>
+                </button>
+
+                <button class="act-btn del" (click)="eliminarProducto(producto.id)">
+                  <i class="ti ti-trash"></i>
+                </button>
               </div>
             </td>
+
           </tr>
-          <tr>
-            <td class="id-cell">#P002</td>
-            <td>
-              <div class="prod-cell">
-                <div class="prod-icon">🥤</div>
-                <div>
-                  <div class="prod-name">Inca Kola 1.5L</div>
-                  <div class="prod-code">1.5lt · Inca Kola</div>
-                </div>
-              </div>
-            </td>
-            <td><span class="cat-badge cb-beb">Bebidas</span></td>
-            <td class="price-cell">S/ 4.20</td>
-            <td>
-              <div class="stock-cell">
-                <span style="font-size:12px;color:#1e2d4f;font-weight:500;width:24px;">8</span>
-                <div class="stock-bar">
-                  <div class="stock-fill" style="width:16%;background:#ea580c;"></div>
-                </div>
-              </div>
-            </td>
-            <td><span class="st st-low">Bajo</span></td>
-            <td>
-              <div class="acts">
-                <button class="act-btn"><i class="ti ti-edit"></i></button>
-                <button class="act-btn del"><i class="ti ti-trash"></i></button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td class="id-cell">#P003</td>
-            <td>
-              <div class="prod-cell">
-                <div class="prod-icon">🧴</div>
-                <div>
-                  <div class="prod-name">Limpiatodo Pino</div>
-                  <div class="prod-code">900ml · Sapolio</div>
-                </div>
-              </div>
-            </td>
-            <td><span class="cat-badge cb-limp">Limpieza</span></td>
-            <td class="price-cell">S/ 6.90</td>
-            <td>
-              <div class="stock-cell">
-                <span style="font-size:12px;color:#1e2d4f;font-weight:500;width:24px;">0</span>
-                <div class="stock-bar">
-                  <div class="stock-fill" style="width:0%;background:#dc2626;"></div>
-                </div>
-              </div>
-            </td>
-            <td><span class="st st-out">Agotado</span></td>
-            <td>
-              <div class="acts">
-                <button class="act-btn"><i class="ti ti-edit"></i></button>
-                <button class="act-btn del"><i class="ti ti-trash"></i></button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td class="id-cell">#P004</td>
-            <td>
-              <div class="prod-cell">
-                <div class="prod-icon">🍟</div>
-                <div>
-                  <div class="prod-name">Papas Lays Clásicas</div>
-                  <div class="prod-code">42g · Frito Lay</div>
-                </div>
-              </div>
-            </td>
-            <td><span class="cat-badge cb-snack">Snacks</span></td>
-            <td class="price-cell">S/ 2.00</td>
-            <td>
-              <div class="stock-cell">
-                <span style="font-size:12px;color:#1e2d4f;font-weight:500;width:24px;">35</span>
-                <div class="stock-bar">
-                  <div class="stock-fill" style="width:70%;background:#16a34a;"></div>
-                </div>
-              </div>
-            </td>
-            <td><span class="st st-ok">OK</span></td>
-            <td>
-              <div class="acts">
-                <button class="act-btn"><i class="ti ti-edit"></i></button>
-                <button class="act-btn del"><i class="ti ti-trash"></i></button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td class="id-cell">#P005</td>
-            <td>
-              <div class="prod-cell">
-                <div class="prod-icon">🍬</div>
-                <div>
-                  <div class="prod-name">Sublime Blanco</div>
-                  <div class="prod-code">32g · Nestlé</div>
-                </div>
-              </div>
-            </td>
-            <td><span class="cat-badge cb-snack">Snacks</span></td>
-            <td class="price-cell">S/ 1.50</td>
-            <td>
-              <div class="stock-cell">
-                <span style="font-size:12px;color:#1e2d4f;font-weight:500;width:24px;">5</span>
-                <div class="stock-bar">
-                  <div class="stock-fill" style="width:10%;background:#ea580c;"></div>
-                </div>
-              </div>
-            </td>
-            <td><span class="st st-low">Bajo</span></td>
-            <td>
-              <div class="acts">
-                <button class="act-btn"><i class="ti ti-edit"></i></button>
-                <button class="act-btn del"><i class="ti ti-trash"></i></button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td class="id-cell">#P006</td>
-            <td>
-              <div class="prod-cell">
-                <div class="prod-icon">🍞</div>
-                <div>
-                  <div class="prod-name">Pan de Molde</div>
-                  <div class="prod-code">500g · Bimbo</div>
-                </div>
-              </div>
-            </td>
-            <td><span class="cat-badge cb-alim">Alimentos</span></td>
-            <td class="price-cell">S/ 5.50</td>
-            <td>
-              <div class="stock-cell">
-                <span style="font-size:12px;color:#1e2d4f;font-weight:500;width:24px;">18</span>
-                <div class="stock-bar">
-                  <div class="stock-fill" style="width:36%;background:#16a34a;"></div>
-                </div>
-              </div>
-            </td>
-            <td><span class="st st-ok">OK</span></td>
-            <td>
-              <div class="acts">
-                <button class="act-btn"><i class="ti ti-edit"></i></button>
-                <button class="act-btn del"><i class="ti ti-trash"></i></button>
-              </div>
-            </td>
-          </tr>
+
         </tbody>
       </table>
     </div>
@@ -274,39 +167,40 @@
 
       <div class="form-grp">
         <label class="form-lbl">Nombre del producto</label>
-        <input class="form-inp" type="text" placeholder="Ej: Arroz Extra Superior">
+        <input class="form-inp" type="text" [(ngModel)]="nuevoProducto.nombre" placeholder="Ej: Arroz Extra Superior">
       </div>
 
       <div class="form-grp">
         <label class="form-lbl">Marca / Presentación</label>
-        <input class="form-inp" type="text" placeholder="Ej: Costeño 1kg">
+        <input class="form-inp" type="text" [(ngModel)]="nuevoProducto.marca_presentacion"
+          placeholder="Ej: Costeño 1kg">
       </div>
 
       <div class="form-row">
         <div class="form-grp">
           <label class="form-lbl">Precio venta</label>
-          <input class="form-inp" type="number" placeholder="S/ 0.00">
+          <input class="form-inp" type="number" [(ngModel)]="nuevoProducto.precio_venta" placeholder="S/ 0.00">
         </div>
         <div class="form-grp">
           <label class="form-lbl">Precio costo</label>
-          <input class="form-inp" type="number" placeholder="S/ 0.00">
+          <input class="form-inp" type="number" [(ngModel)]="nuevoProducto.precio_costo" placeholder="S/ 0.00">
         </div>
       </div>
 
       <div class="form-row">
         <div class="form-grp">
           <label class="form-lbl">Stock actual</label>
-          <input class="form-inp" type="number" placeholder="0" min="0">
+          <input class="form-inp" type="number" [(ngModel)]="nuevoProducto.stock_actual" placeholder="0" min="0">
         </div>
         <div class="form-grp">
           <label class="form-lbl">Stock mínimo</label>
-          <input class="form-inp" type="number" placeholder="5" min="0">
+          <input class="form-inp" type="number" [(ngModel)]="nuevoProducto.stock_minimo" placeholder="5" min="0">
         </div>
       </div>
 
       <div class="form-grp">
         <label class="form-lbl">Categoría</label>
-        <select class="form-select">
+        <select class="form-select" [(ngModel)]="nuevoProducto.categoria">
           <option value="">Seleccionar categoría</option>
           <option>Alimentos</option>
           <option>Bebidas</option>
@@ -319,12 +213,13 @@
 
       <div class="form-grp">
         <label class="form-lbl">Código de barras (opcional)</label>
-        <input class="form-inp" type="text" placeholder="Escanear o ingresar código">
+        <input class="form-inp" type="text" [(ngModel)]="nuevoProducto.codigo_barras"
+          placeholder="Escanear o ingresar código">
       </div>
 
       <hr class="divider">
 
-      <button class="btn-guardar">
+      <button class="btn-guardar" (click)="modoEdicion ? actualizarProducto() : guardarProducto()">
         <i class="ti ti-check" style="font-size:14px;vertical-align:-2px;"></i>
         Guardar Producto
       </button>
