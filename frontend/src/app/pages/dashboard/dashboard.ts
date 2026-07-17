@@ -71,9 +71,11 @@ export class Dashboard implements AfterViewInit, OnInit {
 
     this.dashboardService.obtenerResumen()
       .subscribe({
-        next: (data) => {
+          next: (data) => {
 
-          this.ventasHoy = data.ventas_hoy;
+            if (!data) return;
+
+            this.ventasHoy = data.ventas_hoy;
           this.ventasMes = data.ventas_mes;
           this.totalProductos = data.total_productos;
           this.stockBajo = data.stock_bajo;

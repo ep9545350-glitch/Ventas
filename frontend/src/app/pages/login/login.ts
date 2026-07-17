@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { AuthService } from '../../services/auth';
+import { AuthService, LoginResponse } from '../../services/auth';
 
 @Component({
   selector: 'app-login',
@@ -115,7 +115,7 @@ export class Login {
 
     }).subscribe({
 
-      next: (respuesta) => {
+      next: (respuesta: LoginResponse) => {
 
         localStorage.setItem(
           'token',
@@ -127,16 +127,17 @@ export class Login {
           respuesta.rol
         );
 
-        this.router.navigateByUrl('/');
+        console.log('Login successful, token stored');
+        this.cargando = false;
+
+        this.router.navigateByUrl('/dashboard');
 
       },
 
-      error: () => {
-
-        this.error = 'Correo o contraseña incorrectos';
-
+      error: (err: any) => {
+        console.error(err);
+        this.error = err?.error?.detail || 'Correo o contraseña incorrectos';
         this.cargando = false;
-
       },
 
       complete: () => {

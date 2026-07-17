@@ -47,7 +47,7 @@ export class ThemeService {
       return;
     }
 
-    const tema = localStorage.getItem('tema') || 'Claro';
+    const tema = (typeof window !== 'undefined' && typeof localStorage !== 'undefined') ? (localStorage.getItem('tema') || 'Claro') : 'Claro';
 
     this.cambiarTema(tema);
 

@@ -8,15 +8,17 @@ import { Reportes } from './pages/reportes/reportes';
 import { Configuracion } from './pages/configuracion/configuracion';
 import { Login } from './pages/login/login';
 import { Adminlayout } from './layout/admin-layout/admin-layout';
+import { authGuard } from './services/auth';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 
   { path: 'login', component: Login },
 
   {
     path: '',
     component: Adminlayout,
+    canActivate: [authGuard],
     children: [
       { path: 'dashboard', component: Dashboard },
       { path: 'productos', component: Productos },
