@@ -30,6 +30,8 @@ export class Reportes implements OnInit {
     this.reportesService.obtenerResumen()
       .subscribe((data: any) => {
 
+        if (!data) return;
+
         this.ventasTotales = data.ventas_totales;
         this.transacciones = data.transacciones;
         this.mejorDia = data.mejor_dia;

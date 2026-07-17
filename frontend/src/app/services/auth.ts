@@ -40,12 +40,17 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('rol');
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      localStorage.removeItem('token');
+      localStorage.removeItem('rol');
+    }
     this.router.navigate(['/login']);
   }
 
   isAuthenticated(): boolean {
+    if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
+      return false;
+    }
     return !!localStorage.getItem('token');
   }
 }
@@ -57,6 +62,12 @@ export class AuthService {
 export const authGuard: CanActivateFn = (route, state) => {
 
   const router = inject(Router);
+
+  // Check if we're in browser context (not SSR)
+  if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
+    // During SSR, allow navigation (will be verified in browser)
+    return true;
+  }
 
   const token = localStorage.getItem('token');
 
