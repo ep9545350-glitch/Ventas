@@ -81,12 +81,11 @@
   transition: transform 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
 }
 
-/* Hover desactivado para que no haya agrandarse/achicarse */
-/* .login-shell.side-hover .login-side { ... }
+/*Hover desactivado para que no haya agrandarse/achicarse*/
+/*.login-shell.side-hover .login-side { ... }
    .login-shell.side-hover .login-card { ... }
    .login-shell.card-hover .login-card { ... }
-   .login-shell.card-hover .login-side { ... }
-*/
+   .login-shell.card-hover .login-side { ... }*/
 
 .login-side::before {
   content: '';
@@ -503,3 +502,4 @@
     transform: scaleY(1);
   }
 }
+

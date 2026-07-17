@@ -6,7 +6,7 @@
     padding: 0;
 }
 
-/*KEYFRAMES */
+/*KEYFRAMES*/
 @keyframes fadeUp {
     from {
         opacity: 0;
@@ -163,7 +163,7 @@
     }
 }
 
-/*PÁGINA */
+/*PÁGINA*/
 .ventas-page {
     padding: 24px 26px;
     background: #edf0f7;
@@ -380,14 +380,14 @@
     color: #ea580c;
 }
 
-/*GRID PRINCIPAL */
+/*GRID PRINCIPAL*/
 .grid-main {
     display: grid;
     grid-template-columns: 1fr 340px;
     gap: 14px;
 }
 
-/*HISTORIAL */
+/*HISTORIAL*/
 .historial {
     background: #fff;
     border: 1px solid #e4e8f0;
@@ -494,7 +494,7 @@
     transform: scale(1.03);
 }
 
-/*TABLA */
+/*TABLA*/
 table {
     width: 100%;
     border-collapse: collapse;
@@ -683,7 +683,7 @@ tr:hover .st {
     transform: scale(0.95);
 }
 
-/*PANEL NUEVA VENTA */
+/*PANEL NUEVA VENTA*/
 .panel-venta {
     background: #fff;
     border: 1px solid #e4e8f0;

@@ -16,9 +16,9 @@
     max-width: 100% !important;
 }
 
-/* ══════════════════════════════════════
+/*══════════════════════════════════════
     CABECERA (Alineación limpia)
-══════════════════════════════════════ */
+══════════════════════════════════════*/
 .pg-head {
     display: flex;
     align-items: flex-end;
@@ -108,9 +108,9 @@
     transform: translateY(-1px);
 }
 
-/* ══════════════════════════════════════
+/*══════════════════════════════════════
     MÉTRICAS
-══════════════════════════════════════ */
+══════════════════════════════════════*/
 .mets {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -165,9 +165,9 @@
     color: #f59e0b;
 }
 
-/* ══════════════════════════════════════
+/*══════════════════════════════════════
     GRID PRINCIPAL DE DOS COLUMNAS
-══════════════════════════════════════ */
+══════════════════════════════════════*/
 .grid-main {
     display: grid !important;
     grid-template-columns: 1fr 340px !important;
@@ -238,7 +238,7 @@
     width: 160px;
 }
 
-/* Filtros por categoría en burbujas */
+/*Filtros por categoría en burbujas*/
 .filter-row {
     display: flex;
     gap: 8px;
@@ -269,9 +269,9 @@
     font-weight: 500;
 }
 
-/* ══════════════════════════════════════
+/*══════════════════════════════════════
     TABLA
-══════════════════════════════════════ */
+══════════════════════════════════════*/
 .tabla-card table {
     width: 100% !important;
     border-collapse: collapse;
@@ -347,7 +347,7 @@ td:last-child {
     color: #16a34a;
 }
 
-/* Acciones */
+/*Acciones*/
 .acts {
     display: flex;
     gap: 6px;
@@ -379,9 +379,9 @@ td:last-child {
     border-color: #fee2e2;
 }
 
-/* ══════════════════════════════════════
+/*══════════════════════════════════════
     FORMULARIO LATERAL
-══════════════════════════════════════ */
+══════════════════════════════════════*/
 .form-grp {
     margin-bottom: 14px;
 }

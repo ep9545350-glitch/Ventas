@@ -1,4 +1,4 @@
-/* Importamos tu enlace de Google Fonts con Anton, DM Sans y Syne */
+/*Importamos tu enlace de Google Fonts con Anton, DM Sans y Syne*/
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Syne:wght@700;800&display=swap');
 @import url('https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css');
 
@@ -8,7 +8,7 @@
     padding: 0;
 }
 
-/* ── ANIMACIONES FLUIDAS ──────────────────────────── */
+/*── ANIMACIONES FLUIDAS ────────────────────────────*/
 @keyframes superFadeUp {
     from {
         opacity: 0;
@@ -508,7 +508,7 @@
     box-shadow: 0 0 8px rgba(99, 102, 241, 0.4);
 }
 
-/* GRÁFICO DE BARRAS */
+/*GRÁFICO DE BARRAS*/
 .chart-wrap {
     display: flex;
     align-items: flex-end;
