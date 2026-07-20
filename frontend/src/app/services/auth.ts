@@ -58,10 +58,15 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   const router = inject(Router);
 
-  const token = localStorage.getItem('token');
+  // Verificar que estamos en navegador
+  if (typeof window !== 'undefined') {
 
-  if (token) {
-    return true;
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      return true;
+    }
+
   }
 
   router.navigate(['/login']);
