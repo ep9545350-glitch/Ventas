@@ -15,7 +15,7 @@
 
     <div class="nav-grp">Principal</div>
 
-    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="nav-item-custom">
+    <a routerLink="/dashboard" routerLinkActive="active" class="nav-item-custom">
       <i class="ti ti-layout-dashboard"></i> Dashboard
     </a>
 
@@ -45,14 +45,28 @@
 
   <!-- Footer usuario -->
   <div class="sidebar-footer">
-    <div class="sf-user">
-      <div class="sf-av">DA</div>
-      <div>
-        <div class="sf-name">Daniel A.</div>
-        <div class="sf-role">Administrador</div>
-      </div>
-      <i class="ti ti-dots-vertical sf-icon"></i>
+
+  <div class="sf-user">
+
+    <div class="sf-av">DA</div>
+
+    <div>
+      <div class="sf-name">Daniel A.</div>
+      <div class="sf-role">Administrador</div>
     </div>
+
   </div>
+
+
+  <button
+    class="logout-btn"
+    (click)="cerrarSesion()">
+
+    <i class="ti ti-logout"></i>
+    Cerrar sesión
+
+  </button>
+
+</div>
 
 </div>

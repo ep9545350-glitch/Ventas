@@ -205,3 +205,31 @@
         color: #737373;
         font-size: 14px;
     }
+
+    .logout-btn {
+
+  width: 100%;
+  margin-top: 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: white;
+  padding: 10px;
+
+  border: none;
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  font-size: 14px;
+
+}
+
+
+.logout-btn:hover {
+
+  opacity: .85;
+
+}

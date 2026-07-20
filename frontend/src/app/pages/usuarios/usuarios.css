@@ -11,108 +11,58 @@ ANIMACIONES
 ==========================*/
 
 @keyframes fadeUp{
-    from{
-        opacity:0;
-        transform:translateY(24px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+    from{ opacity:0; transform:translateY(24px); }
+    to{ opacity:1; transform:translateY(0); }
 }
 
 @keyframes fadeIn{
-    from{
-        opacity:0;
-    }
-    to{
-        opacity:1;
-    }
+    from{ opacity:0; }
+    to{ opacity:1; }
 }
 
 @keyframes rowIn{
-    from{
-        opacity:0;
-        transform:translateX(-12px);
-    }
-    to{
-        opacity:1;
-        transform:translateX(0);
-    }
+    from{ opacity:0; transform:translateX(-12px); }
+    to{ opacity:1; transform:translateX(0); }
 }
 
 @keyframes numberPop{
-
-    0%{
-        opacity:0;
-        transform:scale(.75);
-    }
-
-    70%{
-        transform:scale(1.06);
-    }
-
-    100%{
-        opacity:1;
-        transform:scale(1);
-    }
-
+    0%{ opacity:0; transform:scale(.75); }
+    70%{ transform:scale(1.06); }
+    100%{ opacity:1; transform:scale(1); }
 }
 
 @keyframes slideRight{
-
-    from{
-        opacity:0;
-        transform:translateX(20px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateX(0);
-    }
-
+    from{ opacity:0; transform:translateX(20px); }
+    to{ opacity:1; transform:translateX(0); }
 }
 
 @keyframes lineGrow{
-
-    from{
-        transform:scaleX(0);
-    }
-
-    to{
-        transform:scaleX(1);
-    }
-
+    from{ transform:scaleX(0); }
+    to{ transform:scaleX(1); }
 }
 
 @keyframes shimmer{
-
-    from{
-        background-position:-300px 0;
-    }
-
-    to{
-        background-position:300px 0;
-    }
-
+    from{ background-position:-300px 0; }
+    to{ background-position:300px 0; }
 }
 
 /*==========================
 PAGINA
+   OJO: antes esta regla incluía .productos-page, .reportes-page,
+   .configuracion-page, etc. con background:#111827 fijo, así que
+   si este archivo cargaba después de los otros, les pisaba el
+   fondo correcto y los dejaba siempre oscuros. La dejo solo para
+   .usuarios-page (y .page-content como wrapper genérico), usando
+   var(--bg) para que respete el tema activo.
 ==========================*/
 
 .page-content,
-.productos-page,
-.usuarios-page,
-.ventas-page,
-.reportes-page,
-.configuracion-page,
-.dashboard-page{
+.usuarios-page{
 
     padding:30px 40px;
     min-height:100vh;
 
-    background:#111827;
+    background:var(--bg);
 
     font-family:'DM Sans',sans-serif;
 
@@ -142,7 +92,7 @@ CABECERA
 
     font-size:1.9rem;
 
-    color:#ffffff;
+    color:var(--texto);
 
     text-transform:uppercase;
 
@@ -164,7 +114,7 @@ CABECERA
     width:100%;
     height:2px;
 
-    background:#3b82f6;
+    background:var(--boton);
 
     animation:lineGrow .5s ease;
 
@@ -174,7 +124,7 @@ CABECERA
 
     margin-top:8px;
 
-    color:#9ca3af;
+    color:var(--texto-sec);
 
     font-size:12px;
 
@@ -201,9 +151,9 @@ CABECERA
 
     border-radius:10px;
 
-    background:#2563eb;
+    background:var(--boton);
 
-    color:white;
+    color:var(--boton-texto);
 
     cursor:pointer;
 
@@ -215,11 +165,11 @@ CABECERA
 
 .btn-sec:hover{
 
-    background:#3b82f6;
+    filter:brightness(1.1);
 
     transform:translateY(-2px);
 
-    box-shadow:0 10px 25px rgba(37,99,235,.35);
+    box-shadow:0 10px 25px var(--shadow);
 
 }
 
@@ -245,9 +195,9 @@ MÉTRICAS
 
     overflow:hidden;
 
-    background:#1f2937;
+    background:var(--card);
 
-    border:1px solid #374151;
+    border:1px solid var(--borde);
 
     border-radius:16px;
 
@@ -261,29 +211,18 @@ MÉTRICAS
 
 }
 
-.met:nth-child(1){
-    animation-delay:.08s;
-}
-
-.met:nth-child(2){
-    animation-delay:.15s;
-}
-
-.met:nth-child(3){
-    animation-delay:.22s;
-}
-
-.met:nth-child(4){
-    animation-delay:.29s;
-}
+.met:nth-child(1){ animation-delay:.08s; }
+.met:nth-child(2){ animation-delay:.15s; }
+.met:nth-child(3){ animation-delay:.22s; }
+.met:nth-child(4){ animation-delay:.29s; }
 
 .met:hover{
 
     transform:translateY(-5px);
 
-    border-color:#3b82f6;
+    border-color:var(--boton);
 
-    box-shadow:0 15px 35px rgba(0,0,0,.35);
+    box-shadow:0 15px 35px var(--shadow);
 
 }
 
@@ -332,7 +271,7 @@ MÉTRICAS
 
     font-size:12px;
 
-    color:#9ca3af;
+    color:var(--texto-sec);
 
     letter-spacing:.8px;
 
@@ -348,7 +287,7 @@ MÉTRICAS
 
     font-size:30px;
 
-    color:#ffffff;
+    color:var(--texto);
 
     animation:numberPop .5s ease;
 
@@ -360,19 +299,19 @@ MÉTRICAS
 
     font-size:12px;
 
-    color:#9ca3af;
+    color:var(--texto-sec);
 
 }
 
 .up{
 
-    color:#22c55e;
+    color:var(--success);
 
 }
 
 .warn{
 
-    color:#f59e0b;
+    color:var(--warning);
 
 }
 
@@ -397,9 +336,9 @@ TABLA Y PANEL
 .tabla-card,
 .panel-form{
 
-    background:#1f2937;
+    background:var(--card);
 
-    border:1px solid #374151;
+    border:1px solid var(--borde);
 
     border-radius:16px;
 
@@ -430,9 +369,9 @@ TABLA Y PANEL
 .tabla-card:hover,
 .panel-form:hover{
 
-    border-color:#4b5563;
+    border-color:var(--boton);
 
-    box-shadow:0 15px 35px rgba(0,0,0,.35);
+    box-shadow:0 15px 35px var(--shadow);
 
 }
 
@@ -467,7 +406,7 @@ CABECERA TABLA
 
     font-family:'Anton',sans-serif;
 
-    color:#fff;
+    color:var(--texto);
 
     font-size:18px;
 
@@ -487,9 +426,9 @@ BUSCADOR
 
     gap:8px;
 
-    background:#111827;
+    background:var(--card2);
 
-    border:1px solid #374151;
+    border:1px solid var(--borde);
 
     border-radius:10px;
 
@@ -501,9 +440,9 @@ BUSCADOR
 
 .search-box:focus-within{
 
-    border-color:#3b82f6;
+    border-color:var(--boton);
 
-    box-shadow:0 0 0 3px rgba(59,130,246,.15);
+    box-shadow:0 0 0 3px color-mix(in srgb, var(--boton) 15%, transparent);
 
 }
 
@@ -515,7 +454,7 @@ BUSCADOR
 
     outline:none;
 
-    color:white;
+    color:var(--texto);
 
     font-size:13px;
 
@@ -525,7 +464,7 @@ BUSCADOR
 
 .search-box input::placeholder{
 
-    color:#6b7280;
+    color:var(--texto-sec);
 
 }
 
@@ -551,11 +490,11 @@ FILTROS
 
     border-radius:40px;
 
-    background:#111827;
+    background:var(--card2);
 
-    border:1px solid #374151;
+    border:1px solid var(--borde);
 
-    color:#9ca3af;
+    color:var(--texto-sec);
 
     cursor:pointer;
 
@@ -567,11 +506,11 @@ FILTROS
 
 .fc:hover{
 
-    background:#1e3a8a;
+    background:var(--hover);
 
-    border-color:#2563eb;
+    border-color:var(--boton);
 
-    color:white;
+    color:var(--texto);
 
     transform:translateY(-2px);
 
@@ -579,11 +518,11 @@ FILTROS
 
 .fc.on{
 
-    background:#2563eb;
+    background:var(--boton);
 
-    color:white;
+    color:var(--boton-texto);
 
-    border-color:#2563eb;
+    border-color:var(--boton);
 
 }
 
@@ -609,13 +548,13 @@ th{
 
     font-size:12px;
 
-    color:#9ca3af;
+    color:var(--texto-sec);
 
     text-transform:uppercase;
 
     letter-spacing:.8px;
 
-    border-bottom:1px solid #374151;
+    border-bottom:1px solid var(--borde);
 
 }
 
@@ -623,11 +562,11 @@ td{
 
     padding:15px 12px;
 
-    color:#e5e7eb;
+    color:var(--texto);
 
     font-size:13px;
 
-    border-bottom:1px solid #2d3748;
+    border-bottom:1px solid var(--borde);
 
     transition:.25s;
 
@@ -650,7 +589,7 @@ tr:nth-child(6){animation-delay:.35s;}
 
 tr:hover td{
 
-    background:#273449;
+    background:var(--hover);
 
 }
 
@@ -665,7 +604,7 @@ td:last-child{
 
     font-family:'Anton',sans-serif;
 
-    color:#9ca3af;
+    color:var(--texto-sec);
 
     letter-spacing:.5px;
 
@@ -711,7 +650,7 @@ tr:hover .prod-icon{
 
 .prod-name{
 
-    color:white;
+    color:var(--texto);
 
     font-weight:600;
 
@@ -721,7 +660,7 @@ tr:hover .prod-icon{
 
 .prod-code{
 
-    color:#9ca3af;
+    color:var(--texto-sec);
 
     font-size:11px;
 
@@ -731,6 +670,9 @@ tr:hover .prod-icon{
 
 /*==========================
 ESTADOS
+   (antes: fondo verde oscuro #14532d + texto verde claro #86efac,
+   fijo — se veía mal en modo claro. Ahora usa --success con opacidad,
+   igual que las badges de reportes/configuración)
 ==========================*/
 
 .st{
@@ -747,9 +689,9 @@ ESTADOS
 
 .st-ok{
 
-    background:#14532d;
+    background:color-mix(in srgb, var(--success) 18%, transparent);
 
-    color:#86efac;
+    color:var(--success);
 
 }
 
@@ -781,11 +723,11 @@ ACCIONES
 
     border-radius:10px;
 
-    border:1px solid #374151;
+    border:1px solid var(--borde);
 
-    background:#111827;
+    background:var(--card2);
 
-    color:#9ca3af;
+    color:var(--texto-sec);
 
     cursor:pointer;
 
@@ -795,11 +737,11 @@ ACCIONES
 
 .act-btn:hover{
 
-    background:#2563eb;
+    background:var(--boton);
 
-    border-color:#2563eb;
+    border-color:var(--boton);
 
-    color:white;
+    color:var(--boton-texto);
 
     transform:translateY(-2px);
 
@@ -807,9 +749,11 @@ ACCIONES
 
 .act-btn.del:hover{
 
-    background:#dc2626;
+    background:var(--danger);
 
-    border-color:#dc2626;
+    border-color:var(--danger);
+
+    color:#fff;
 
 }
 /*==========================
@@ -836,7 +780,7 @@ FORMULARIO LATERAL
 
     text-transform:uppercase;
 
-    color:#9ca3af;
+    color:var(--texto-sec);
 
 }
 
@@ -849,11 +793,11 @@ FORMULARIO LATERAL
 
     border-radius:12px;
 
-    border:1px solid #374151;
+    border:1px solid var(--borde);
 
-    background:#111827;
+    background:var(--card2);
 
-    color:#ffffff;
+    color:var(--texto);
 
     outline:none;
 
@@ -864,7 +808,7 @@ FORMULARIO LATERAL
 }
 
 .form-inp::placeholder{
-    color:#6b7280;
+    color:var(--texto-sec);
 }
 
 .form-select{
@@ -873,21 +817,21 @@ FORMULARIO LATERAL
 }
 
 .form-select option{
-    background:#1f2937;
-    color:white;
+    background:var(--card);
+    color:var(--texto);
 
 }
 
 .form-inp:hover,
 .form-select:hover{
-    border-color:#4b5563;
+    border-color:var(--boton);
 }
 
 .form-inp:focus,
 .form-select:focus{
 
-    border-color:#3b82f6;
-    box-shadow:0 0 0 3px rgba(59,130,246,.15);
+    border-color:var(--boton);
+    box-shadow:0 0 0 3px color-mix(in srgb, var(--boton) 15%, transparent);
 
 }
 
@@ -898,7 +842,7 @@ DIVISOR
 .divider{
     border:none;
     height:1px;
-    background:#374151;
+    background:var(--borde);
     margin:22px 0;
 }
 /*==========================
@@ -917,9 +861,9 @@ BOTÓN
 
     cursor:pointer;
 
-    background:#2563eb;
+    background:var(--boton);
 
-    color:white;
+    color:var(--boton-texto);
 
     font-family:'Anton',sans-serif;
 
@@ -933,11 +877,11 @@ BOTÓN
 
 .btn-guardar:hover{
 
-    background:#3b82f6;
+    filter:brightness(1.1);
 
     transform:translateY(-2px);
 
-    box-shadow:0 12px 28px rgba(37,99,235,.35);
+    box-shadow:0 12px 28px var(--shadow);
 
 }
 
@@ -954,79 +898,50 @@ RESPONSIVE
 @media(max-width:1200px){
 
     .mets{
-
         grid-template-columns:repeat(2,1fr);
-
     }
 
     .grid-main{
-
         grid-template-columns:1fr;
-
     }
 
     .panel-form{
-
         position:relative;
-
         top:auto;
-
     }
 
 }
 @media(max-width:768px){
 
     .usuarios-page{
-
         padding:20px;
-
     }
     .pg-head{
-
         flex-direction:column;
-
         align-items:flex-start;
-
         gap:15px;
-
     }
     .mets{
-
         grid-template-columns:1fr;
-
     }
     .card-head{
-
         flex-direction:column;
-
         align-items:flex-start;
-
     }
     .search-box{
-
         width:100%;
-
     }
     .search-box input{
-
         width:100%;
-
     }
     .filter-row{
-
         overflow:auto;
-
         padding-bottom:5px;
-
     }
     table{
-
         min-width:800px;
-
     }
     .tabla-card{
-
         overflow-x:auto;
-
     }
 }

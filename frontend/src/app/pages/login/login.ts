@@ -127,7 +127,7 @@ export class Login {
           respuesta.rol
         );
 
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/dashboard');
 
       },
 

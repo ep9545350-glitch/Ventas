@@ -1,27 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@300;400;500&display=swap');
 
 /*==========================
- VARIABLES
-===========================*/
-
-:root{
-
-    --bg:#edf0f7;
-    --card:#ffffff;
-    --card2:#f8fbff;
-
-    --text:#0f172a;
-    --text2:#64748b;
-
-    --borde:#e2e8f0;
-
-    --boton:#1e2d4f;
-
-    --input:#ffffff;
-
-}
-
-/*==========================
  RESET
 ===========================*/
 
@@ -33,6 +12,10 @@
 
 /*==========================
  PAGINA
+   IMPORTANTE: este archivo NO define :root ni body.tema-*.
+   Todo viene de tu styles.css global (--bg, --card, --card2, --texto,
+   --texto-sec, --borde, --boton, --boton-texto, --hover, --shadow,
+   --success, --warning, --danger). Los 3 temas funcionan solos.
 ===========================*/
 
 .configuracion-page{
@@ -45,7 +28,7 @@
 
     font-family:'DM Sans',sans-serif;
 
-    color:var(--text);
+    color:var(--texto);
 
     transition:.35s;
 
@@ -75,7 +58,7 @@
 
     font-size:1.8rem;
 
-    color:var(--text);
+    color:var(--texto);
 
     text-transform:uppercase;
 
@@ -111,7 +94,7 @@
 
     font-size:13px;
 
-    color:var(--text2);
+    color:var(--texto-sec);
 
 }
 
@@ -145,7 +128,7 @@
 
     border:1px solid var(--borde);
 
-    box-shadow:0 12px 35px rgba(0,0,0,.08);
+    box-shadow:0 12px 35px var(--shadow);
 
     transition:.3s;
 
@@ -157,6 +140,9 @@
 
 }
 
+/* acentos decorativos por tarjeta: quedan fijos a propósito
+   (son categóricos, no de tema) salvo el primero que sigue
+   al color de acento del tema */
 .config-card::before{
 
     content:"";
@@ -173,19 +159,19 @@
 
     border-radius:50%;
 
-    background:rgba(59,130,246,.15);
+    background:color-mix(in srgb, var(--boton) 15%, transparent);
 
 }
 
 .config-card:nth-child(2)::before{
 
-    background:rgba(16,185,129,.15);
+    background:color-mix(in srgb, var(--success) 15%, transparent);
 
 }
 
 .config-card:nth-child(3)::before{
 
-    background:rgba(245,158,11,.15);
+    background:color-mix(in srgb, var(--warning) 15%, transparent);
 
 }
 
@@ -199,7 +185,7 @@
 
     font-size:11px;
 
-    color:var(--text2);
+    color:var(--texto-sec);
 
     text-transform:uppercase;
 
@@ -217,13 +203,13 @@
 
     font-size:1.35rem;
 
-    color:var(--text);
+    color:var(--texto);
 
 }
 
 .card-copy{
 
-    color:var(--text2);
+    color:var(--texto-sec);
 
     line-height:1.6;
 
@@ -239,7 +225,7 @@
 
     justify-content:space-between;
 
-    color:var(--text2);
+    color:var(--texto-sec);
 
     font-size:13px;
 
@@ -247,7 +233,7 @@
 
 .card-footer strong{
 
-    color:var(--text);
+    color:var(--texto);
 
 }
 
@@ -297,7 +283,7 @@
 
     font-family:'Anton';
 
-    color:var(--text);
+    color:var(--texto);
 
     font-size:1.2rem;
 
@@ -305,7 +291,7 @@
 
 .panel-sub{
 
-    color:var(--text2);
+    color:var(--texto-sec);
 
     margin-top:5px;
 
@@ -323,7 +309,7 @@
 
     background:var(--boton);
 
-    color:white;
+    color:var(--boton-texto);
 
     cursor:pointer;
 
@@ -334,6 +320,8 @@
 .btn-pri:hover{
 
     transform:translateY(-2px);
+
+    filter:brightness(1.1);
 
 }
 
@@ -371,7 +359,7 @@
 
 .setting-top span{
 
-    color:var(--text2);
+    color:var(--texto-sec);
 
     font-size:11px;
 
@@ -387,7 +375,7 @@
 
     font-family:'Anton';
 
-    color:var(--text);
+    color:var(--texto);
 
     font-size:1.1rem;
 
@@ -412,7 +400,7 @@
     font-size:12px;
     text-transform:uppercase;
     letter-spacing:.8px;
-    color:var(--text2);
+    color:var(--texto-sec);
 }
 
 .field input,
@@ -426,9 +414,9 @@
 
     border:1px solid var(--borde);
 
-    background:var(--input);
+    background:var(--card2);
 
-    color:var(--text);
+    color:var(--texto);
 
     outline:none;
 
@@ -441,7 +429,7 @@
 
     border-color:var(--boton);
 
-    box-shadow:0 0 0 3px rgba(59,130,246,.20);
+    box-shadow:0 0 0 3px color-mix(in srgb, var(--boton) 20%, transparent);
 
 }
 
@@ -465,7 +453,7 @@
 
     background:var(--card);
 
-    color:var(--text);
+    color:var(--texto);
 
     border-radius:999px;
 
@@ -489,7 +477,7 @@
 
     background:var(--boton);
 
-    color:white;
+    color:var(--boton-texto);
 
     border-color:transparent;
 
@@ -523,7 +511,7 @@
 
 .setting-item h4{
 
-    color:var(--text);
+    color:var(--texto);
 
     margin-bottom:5px;
 
@@ -531,7 +519,7 @@
 
 .setting-item p{
 
-    color:var(--text2);
+    color:var(--texto-sec);
 
     font-size:13px;
 
@@ -569,7 +557,7 @@
 
     border-radius:999px;
 
-    background:#cbd5e1;
+    background:var(--borde);
 
     transition:.30s;
 
@@ -591,7 +579,7 @@
 
     border-radius:50%;
 
-    background:white;
+    background:var(--card);
 
     transition:.30s;
 
@@ -606,6 +594,8 @@
 .switch input:checked + .slider::before{
 
     transform:translateX(21px);
+
+    background:var(--boton-texto);
 
 }
 
@@ -627,7 +617,7 @@
 
     font-weight:700;
 
-    color:var(--text);
+    color:var(--texto);
 
     margin-bottom:14px;
 
@@ -635,7 +625,7 @@
 
 .aside-card p{
 
-    color:var(--text2);
+    color:var(--texto-sec);
 
     margin-bottom:20px;
 
@@ -671,7 +661,7 @@
 
 .aside-row span{
 
-    color:var(--text);
+    color:var(--texto);
 
     font-weight:600;
 
@@ -709,7 +699,7 @@
 
 .integration-item span{
 
-    color:var(--text);
+    color:var(--texto);
 
     font-weight:600;
 
@@ -717,7 +707,7 @@
 
 .integration-item strong{
 
-    color:var(--text2);
+    color:var(--texto-sec);
 
 }
 
@@ -735,7 +725,7 @@
 
     transform:translateY(-5px);
 
-    box-shadow:0 18px 40px rgba(0,0,0,.15);
+    box-shadow:0 18px 40px var(--shadow);
 
 }
 
@@ -749,6 +739,7 @@
 .delay4{animation-delay:.20s;}
 .delay5{animation-delay:.25s;}
 .delay6{animation-delay:.30s;}
+
 /*=========================================
     ANIMACIONES
 =========================================*/
@@ -792,217 +783,10 @@
 }
 
 /*=========================================
-            TEMA CLARO
-=========================================*/
-
-body.tema-claro{
-
-    --bg:#edf0f7;
-    --card:#ffffff;
-    --card2:#f8fbff;
-
-    --text:#0f172a;
-    --text2:#64748b;
-
-    --borde:#dbe4ef;
-
-    --input:#ffffff;
-
-    --boton:#1e2d4f;
-
-}
-
-/*=========================================
-            TEMA OSCURO
-=========================================*/
-
-body.tema-oscuro{
-
-    --bg:#0f172a;
-    --card:#1e293b;
-    --card2:#273449;
-
-    --text:#f8fafc;
-    --text2:#cbd5e1;
-
-    --borde:#334155;
-
-    --input:#1e293b;
-
-    --boton:#3b82f6;
-
-}
-
-/* Texto */
-
-body.tema-oscuro
-.pg-title,
-
-body.tema-oscuro
-.panel-title,
-
-body.tema-oscuro
-.card-title,
-
-body.tema-oscuro
-.setting-top strong,
-
-body.tema-oscuro
-.setting-item h4,
-
-body.tema-oscuro
-.aside-title,
-
-body.tema-oscuro
-.integration-item span,
-
-body.tema-oscuro
-.aside-row span{
-
-    color:var(--text);
-
-}
-
-body.tema-oscuro
-.card-copy,
-
-body.tema-oscuro
-.pg-sub,
-
-body.tema-oscuro
-.panel-sub,
-
-body.tema-oscuro
-.setting-item p,
-
-body.tema-oscuro
-.field label,
-
-body.tema-oscuro
-.card-footer,
-
-body.tema-oscuro
-.integration-item strong,
-
-body.tema-oscuro
-.aside-card p{
-
-    color:var(--text2);
-
-}
-
-/* Inputs */
-
-body.tema-oscuro input,
-
-body.tema-oscuro select{
-
-    background:var(--input);
-
-    color:var(--text);
-
-    border:1px solid var(--borde);
-
-}
-
-/*=========================================
-            TEMA MODERNO
-=========================================*/
-
-body.tema-moderno{
-
-    --bg:#081018;
-
-    --card:#111c2d;
-
-    --card2:#162437;
-
-    --text:#ffffff;
-
-    --text2:#8ec5ff;
-
-    --borde:#24415f;
-
-    --input:#14253d;
-
-    --boton:#00c2ff;
-
-}
-
-/* Titulos */
-
-body.tema-moderno
-.pg-title,
-
-body.tema-moderno
-.panel-title,
-
-body.tema-moderno
-.card-title,
-
-body.tema-moderno
-.setting-top strong,
-
-body.tema-moderno
-.setting-item h4,
-
-body.tema-moderno
-.aside-title,
-
-body.tema-moderno
-.integration-item span,
-
-body.tema-moderno
-.aside-row span{
-
-    color:var(--text);
-
-}
-
-body.tema-moderno
-.card-copy,
-
-body.tema-moderno
-.pg-sub,
-
-body.tema-moderno
-.panel-sub,
-
-body.tema-moderno
-.field label,
-
-body.tema-moderno
-.setting-item p,
-
-body.tema-moderno
-.card-footer,
-
-body.tema-moderno
-.integration-item strong,
-
-body.tema-moderno
-.aside-card p{
-
-    color:var(--text2);
-
-}
-
-/* Inputs */
-
-body.tema-moderno input,
-
-body.tema-moderno select{
-
-    background:var(--input);
-
-    color:white;
-
-    border:1px solid var(--borde);
-
-}
-
-/*=========================================
-    TRANSICIONES GLOBALES
+    TRANSICIONES GLOBALES DEL COMPONENTE
+    (además de las transiciones de color/fondo/borde que ya
+    aplica tu styles.css global vía "*", aquí se agrega la
+    transición de transform que usan los hover de esta página)
 =========================================*/
 
 .configuracion-page,

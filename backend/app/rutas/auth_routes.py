@@ -17,6 +17,8 @@ def get_db():
 @router.post("/login")
 def login(datos: LoginRequest, db: Session = Depends(get_db)):
 
+    print("Entró al endpoint /login")
+
     resultado = login_usuario(
         db,
         datos.email,
