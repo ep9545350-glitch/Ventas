@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@300;400;500&family=Syne:wght@700;800&display=swap');
 
 .navbar-custom {
-    background: #fff;
-    border-bottom: 1px solid #e4e8f0;
+    background: var(--card);
+    border-bottom: 1px solid var(--borde);
     padding: 12px 26px;
     display: flex;
     align-items: center;
@@ -14,7 +14,7 @@
 /*Botón de Hamburguesa*/
 #sidebarToggle {
     background: transparent;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--borde);
     border-radius: 8px;
     width: 38px;
     height: 38px;
@@ -22,15 +22,15 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: #334155;
+    color: var(--texto-sec);
     transition: all 0.2s ease;
     padding: 0;
 }
 
 #sidebarToggle:hover {
-    background-color: #f1f5f9;
-    color: #000000;
-    border-color: #cbd5e1;
+    background-color: var(--hover);
+    color: var(--texto);
+    border-color: var(--boton);
 }
 
 #sidebarToggle:active {
@@ -44,50 +44,29 @@
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 @keyframes bellShake {
-
-    0%,
-    100% {
-        transform: rotate(0deg);
-    }
-
-    20% {
-        transform: rotate(15deg);
-    }
-
-    40% {
-        transform: rotate(-12deg);
-    }
-
-    60% {
-        transform: rotate(8deg);
-    }
-
-    80% {
-        transform: rotate(-5deg);
-    }
+    0%, 100% { transform: rotate(0deg); }
+    20% { transform: rotate(15deg); }
+    40% { transform: rotate(-12deg); }
+    60% { transform: rotate(8deg); }
+    80% { transform: rotate(-5deg); }
 }
 
 .navbar-brand-text {
     font-family: 'Anton', sans-serif;
     font-size: 1.4rem;
-    color: #1e2d4f;
+    color: var(--texto);
     text-transform: uppercase;
     letter-spacing: 1px;
     line-height: 1;
 }
 
 .navbar-brand-text span {
-    color: #7b93c4;
+    color: var(--texto-sec);
 }
 
 .navbar-right {
@@ -100,21 +79,21 @@
     width: 36px;
     height: 36px;
     border-radius: 9px;
-    border: 1px solid #e4e8f0;
-    background: #fff;
+    border: 1px solid var(--borde);
+    background: var(--card);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #8a96a8;
+    color: var(--texto-sec);
     cursor: pointer;
     transition: all 0.18s;
     position: relative;
 }
 
 .nb-btn:hover {
-    background: #f5f7fb;
-    color: #1e2d4f;
-    border-color: #c8d4e8;
+    background: var(--hover);
+    color: var(--texto);
+    border-color: var(--boton);
     transform: scale(1.06);
 }
 
@@ -129,8 +108,8 @@
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: #ef4444;
-    border: 1.5px solid #fff;
+    background: var(--danger);
+    border: 1.5px solid var(--card);
 }
 
 .user-pill {
@@ -139,15 +118,15 @@
     gap: 8px;
     padding: 5px 10px 5px 5px;
     border-radius: 9px;
-    border: 1px solid #e4e8f0;
-    background: #fff;
+    border: 1px solid var(--borde);
+    background: var(--card);
     cursor: pointer;
     transition: all 0.18s;
 }
 
 .user-pill:hover {
-    background: #f5f7fb;
-    border-color: #c8d4e8;
+    background: var(--hover);
+    border-color: var(--boton);
     transform: scale(1.02);
 }
 
@@ -155,35 +134,38 @@
     width: 26px;
     height: 26px;
     border-radius: 7px;
-    background: #1e2d4f;
+    background: var(--boton);
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: 'Syne', sans-serif;
     font-size: 10px;
     font-weight: 700;
-    color: #fff;
+    color: var(--boton-texto);
 }
 
 .user-name {
     font-size: 12px;
     font-weight: 500;
-    color: #1e2d4f;
+    color: var(--texto);
 }
 
 .user-role {
     font-size: 10px;
-    color: #b0baca;
+    color: var(--texto-sec);
 }
 
+/* badge "En línea": queda con tinte verde fijo a propósito (es un
+   estado semántico, como los badges de reportes), pero ahora vía
+   --success con opacidad para que no desentone en modo oscuro */
 .live-badge {
     display: flex;
     align-items: center;
     gap: 5px;
     font-size: 11px;
-    color: #16a34a;
-    background: #f0fdf4;
-    border: 1px solid #bbf7d0;
+    color: var(--success);
+    background: color-mix(in srgb, var(--success) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--success) 35%, transparent);
     padding: 4px 10px;
     border-radius: 20px;
     font-weight: 500;
@@ -193,20 +175,11 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: #22c55e;
+    background: var(--success);
     animation: dotPulse 2s infinite;
 }
 
 @keyframes dotPulse {
-
-    0%,
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-
-    50% {
-        transform: scale(1.7);
-        opacity: 0.3;
-    }
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.7); opacity: 0.3; }
 }
